@@ -1,7 +1,7 @@
 #include <algorithm>
 #include <iostream>
 #include <cmath>
-//#include <bits/ranges_algobase.h>
+
 
 using namespace std;
 
