@@ -498,11 +498,15 @@ int main() // PROGRAM PRINCIPAL
                         break;
 
                         case 9: {
-                            cout<<"Introduceti elementul pe care il cautati: \n";
-                            float y;
-                            cin>>y;
                             for (int i = 0; i < n; i++)
                                 w[i] = v[i];
+                            QuickSort(0,n-1,w);
+                            cout<<"Sirul sortat este: ";
+                            for (int i = 0; i < n; i++)
+                                cout<<w[i]<<" ";
+                            cout<<"\nIntroduceti elementul pe care il cautati: ";
+                            float y;
+                            cin>>y;
                             CautareBinara(0,n-1,w,y);
                         } //Cautare binara
                         break;
