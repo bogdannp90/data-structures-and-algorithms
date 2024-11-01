@@ -246,47 +246,70 @@ void RadixSort(int n, int x[100]) {
     }
 }
 
-void CautareSecventiala(int n, float x[100]) {
-    cout<<"Introduceti elementul pe care il cautati: \n";
-    float y;
-    cin>>y;
+void CautareSecventiala(int n, float x[100], float y) {
     int nr_aparitii = 0;
-    for (int i = 0; i < n; i++) if(x[i] == y) nr_aparitii++;
-    if (nr_aparitii == 0) cout<<"Nu s-a gasit elementul in sir!";
-    else cout<<"Elementul "<<y<<" apare de "<<nr_aparitii<<" ori in sir\n";
+    for (int i = 0; i < n; i++) if (x[i] == y) nr_aparitii++;
+    if (nr_aparitii == 0) cout << "Nu s-a gasit elementul in sir!";
+    if (nr_aparitii == 1) cout << "Elementul " << y << " apare o data in sir.\n";
+    if (nr_aparitii != 1) cout << "Elementul " << y << " apare de " << nr_aparitii << " ori in sir.\n";
 }
 
-void CautareBinara(int s,int d, float x[100], float y) {
-    if(y<x[s] or y>x[d]) {
-        cout<<"Nu s-a gasit elementul in sir!\n";
+void CautareBinara(int s, int d, float x[100], float y) {
+    if (y < x[s] or y > x[d]) {
+        cout << "Nu s-a gasit elementul in sir!\n";
         return;
     }
-    if(s<d) { //exista minim 2 elemente in sir
-        int m = (s+d) / 2;
-        if(x[m] == y) {
-            cout<<"Elementul cautat se afla in sir pe pozitia "<<m<<"\n";
+    if (s < d) {
+        //exista minim 2 elemente in sir
+        int m = (s + d) / 2;
+        if (x[m] == y) {
+            cout << "Elementul cautat se afla in sir pe pozitia " << m << "\n";
             return;
         }
-        if(y<x[m] and s<=m-1) CautareBinara(s,m-1,x,y);
-        if(y>x[m]) CautareBinara(m+1,d,x,y);
-    }
-    else { // sirul are doar un element ( s==d )
-        if(x[s] == y)
-            cout<<"Elementul cautat se afla in sir pe pozitia "<<s<<"\n";
+        if (y < x[m] and s <= m - 1) CautareBinara(s, m - 1, x, y);
+        if (y > x[m]) CautareBinara(m + 1, d, x, y);
+    } else {
+        // sirul are doar un element ( s==d )
+        if (x[s] == y)
+            cout << "Elementul cautat se afla in sir pe pozitia " << s << "\n";
         else
-            cout<<"Nu s-a gasit elementul in sir!\n";
+            cout << "Nu s-a gasit elementul in sir!\n";
     }
 }
 
-// ########################  CAOPITOLUL 3  ########################
+// ########################  CAOPITOLUL 3: Liste dinamice  ########################
+
+struct numar {
+    int v;
+    numar *urm;
+};
+
+numar *creare_lista() {
+    int x;
+    numar *cap, *u, *c;
+    cout<<"\nIntroduceti valoare de pus in capat de lista: ";
+    cin>>x;
+    cap = new numar;
+    cap->v = x;
+    cap->urm = NULL;
+    u = cap; //ultimul element din lista
+    int n;
+
+    cin>>n;
+   for(int i = 0; i < n; i++) {
+        cin>>x;
+        c = new numar;
+        c->v = x;
+        c->urm = NULL;
+        u->urm = c;
+        u=c;
+    }
+    return cap;
+}
 
 int main() // PROGRAM PRINCIPAL
 {
     int op, op1, op2, op3;
-
-    // pentru ordonare de siruri
-    // int n;
-    // float v[100], w[100];
 
     do // reia meniu principal pana la exit
     {
@@ -401,11 +424,12 @@ int main() // PROGRAM PRINCIPAL
                     cout << "2.6. Insertion Sort \n";
                     cout << "2.7. Shell Sort \n";
                     cout << "2.8. Radix Sort \n";
-                    cout << "2.9. Cautarea intr-u sir ordonat \n";
+                    cout << "2.9. Cautarea secventiala intr-un sir \n";
+                    cout << "2.10. Cautarea binara intr-un sir \n";
                     cout << "2.0. Exit algoritmi de sortare!\n";
 
 
-                    cout << "Optiune algoritmi de sortare: ";
+                    cout << "\nOptiune algoritmi de sortare: ";
                     cin >> op2;
                     switch (op2) {
                         case 1: {
@@ -500,14 +524,24 @@ int main() // PROGRAM PRINCIPAL
                         case 9: {
                             for (int i = 0; i < n; i++)
                                 w[i] = v[i];
-                            QuickSort(0,n-1,w);
-                            cout<<"Sirul sortat este: ";
-                            for (int i = 0; i < n; i++)
-                                cout<<w[i]<<" ";
-                            cout<<"\nIntroduceti elementul pe care il cautati: ";
+                            cout << "\nIntroduceti elementul pe care il cautati: ";
                             float y;
-                            cin>>y;
-                            CautareBinara(0,n-1,w,y);
+                            cin >> y;
+                            CautareSecventiala(n, w, y);
+                        }
+                        break;
+
+                        case 10: {
+                            for (int i = 0; i < n; i++)
+                                w[i] = v[i];
+                            QuickSort(0, n - 1, w);
+                            cout << "\nSirul sortat este: ";
+                            for (int i = 0; i < n; i++)
+                                cout << w[i] << " ";
+                            cout << "\nIntroduceti elementul pe care il cautati: ";
+                            float y;
+                            cin >> y;
+                            CautareBinara(0, n - 1, w, y);
                         } //Cautare binara
                         break;
 
@@ -571,7 +605,6 @@ int main() // PROGRAM PRINCIPAL
                 cout << "Optiune invalida!" << endl;
                 break;
         }
-        // clrscr();
     } while (op != 0); // end meniu principal
 
     return 0;
