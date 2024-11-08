@@ -5,6 +5,11 @@
 
 using namespace std;
 
+struct numar {
+    int v; // valoarea din lista
+    numar *urm; // legatura catre urmatorul element din lista
+}; // structura elemente lista simplu inlantuita
+
 // ########################  CAOPITOLUL 1: PROBLEME DIVERSE  ########################
 
 void ec2(float a, float b, float c) {
@@ -279,30 +284,171 @@ void CautareBinara(int s, int d, float x[100], float y) {
 
 // ########################  CAOPITOLUL 3: Liste dinamice  ########################
 
-struct numar {
-    int v;
-    numar *urm;
-};
-
 numar *creare_lista() {
-    int x;
     numar *cap, *u, *c;
-    cout<<"\nIntroduceti valoare de pus in capat de lista: ";
-    cin>>x;
+    int x, n;
+    cout << "creare lista!" << endl;
+    // creare capat lista
+    cout << "Valoare cap lista x = ";
+    cin >> x;
     cap = new numar;
     cap->v = x;
     cap->urm = NULL;
-    u = cap; //ultimul element din lista
-    int n;
-
-    cin>>n;
-   for(int i = 0; i < n; i++) {
-        cin>>x;
+    u = cap; // ultimul element din lista
+    cout << "Numarul de elemente care se adauga in lista la cearea listei n = ";
+    cin >> n;
+    for (int i = 1; i <= n; i++) {
+        cout << "Valoare de adaugat in lista x = ";
+        cin >> x;
         c = new numar;
         c->v = x;
         c->urm = NULL;
-        u->urm = c;
-        u=c;
+        u->urm = c; // stabileste legatura intre ultimul elemnt si noul element adaugat
+        u = c; // c devine ultimul element
+    }
+    return cap;
+}
+
+void parcurgere_lista(numar *cap) {
+    numar *c;
+    if (cap == NULL)
+        cout << "Lista este vida!" << endl;
+    else {
+        c = cap;
+        while (c != NULL) {
+            cout << c->v << " ";
+            c = c->urm;
+        }
+    }
+}
+
+numar *stergere_din_lista(numar *cap) {
+    int cont = 0;
+    int s;
+
+    numar *c, *p;
+
+    do {
+        if (cap == NULL)
+            cout << "Lista este vida! Nu sunt valori de sters!" << endl;
+        else {
+            //sterge elementul cu valoarea s de cate ori apare in lista
+            cout << "Valoare de sters s = ";
+            cin >> s;
+            int nrs = 0; // numara de cate ori am sters s din lista
+            // stergem valoarea s daca se afla la inceput la lista
+            while (cap->v == s) {
+                cap = cap->urm;
+                nrs++;
+                if (cap == NULL)
+                    break;
+            }
+            if (cap != NULL) {
+                c = cap->urm;
+                p = cap; // precedentul elementului curent c
+                while (c != NULL) {
+                    if (c->v == s) {
+                        // sterge din lista pe c
+                        p->urm = c->urm;
+                        nrs++;
+                        c = c->urm;
+                    } else {
+                        p = c;
+                        c = c->urm;
+                    }
+                }
+            }
+            cout << "Elementul de sters " << s << " a fost sters de " << nrs << " ori" << endl;
+            cout << "Lista ramasa este: ";
+            parcurgere_lista(cap);
+            cout << endl;
+        }
+        cout << "Continua stergerea [0/1]? ";
+        cin >> cont;
+    } while (cont);
+    return cap;
+}
+
+numar *adaugare_in_lista(numar *cap, int a) {
+    int opa;
+    numar *p;
+    do {
+        cout << endl << "Tip adaugare:" << endl;
+        cout << "1. Adaugare la inceput de lista:" << endl;
+        cout << "2. Adaugare dupa element din interiorul listei:" << endl;
+        cout << "3. Adaugare la sfarsitul listei:" << endl;
+        cout << "0. Incheiere adaugare!" << endl;
+        cout << "Optiune adaugare: ";
+        cin >> opa;
+        switch (opa) {
+            case 1: // adauga la inceput
+                p = new numar;
+                p->v = a;
+                p->urm = cap;
+                cap = p;
+                parcurgere_lista(cap);
+                cout << endl;
+                break;
+            case 2: // adauga dupa elemnet cu valoare dat din lista
+                // citim valoarea dupa care se adauga
+                int y;
+                numar *c; // c - elementul curent din lista
+                cout << "Valoare dupa care se face adaugarea y = ";
+                cin >> y;
+                c = cap;
+                while (c != NULL) {
+                    if (c->v == y) {
+                        // adauga valoare a dupa y
+                        if (c->urm == NULL) // c este ultimul element din lista
+                        {
+                            p = new numar;
+                            p->v = a;
+                            p->urm = NULL;
+                            c->urm = p;
+                            c = c->urm;
+                        } else // c se afla in interiorul listei
+                        {
+                            p = new numar;
+                            p->v = a;
+                            p->urm = c->urm;
+                            c->urm = p;
+                            c = c->urm;
+                        }
+                    }
+                    c = c->urm;
+                } // end while *c
+                parcurgere_lista(cap);
+                cout << endl;
+                break;
+            case 3: // adauga la sfarsitul la listei
+                numar *u;
+                u = cap;
+            //urgem lista pentru a ajunge la ultimul element
+                while (u->urm != NULL)
+                    u = u->urm;
+                p = new numar;
+                p->v = a;
+                p->urm = NULL;
+                u->urm = p;
+                parcurgere_lista(cap);
+                cout << endl;
+                break;
+            case 0:
+                cout << "incheiat adaugare!" << endl;
+                break;
+            default:
+                cout << "Optiune invalida!" << endl;
+                break;
+        } // end switch
+    } while (opa);
+    return cap;
+}
+
+numar *modificare_in_lista(numar *cap, int y, int w) {
+    numar *c;
+    for (c = cap; c != NULL; c = c->urm) {
+        if (c->v == y)
+            c->v = w;
     }
     return cap;
 }
@@ -562,22 +708,51 @@ int main() // PROGRAM PRINCIPAL
                 do {
                     cout << endl << "Liste dinamice" << endl;
                     cout << "3.1. Liste simplu inlantuite " << endl;
-                    cout << "3.2. Liste dublu inlantuite " << endl;
-                    cout << "3.3. Stive " << endl;
-                    cout << "3.4. Cozi " << endl;
-                    cout << "3.5. Aplicatia 1: Adunarea si inmultirea a doua polinoame " << endl;
-                    cout << "3.6. Aplicatia 2: Interclasarea a doua liste ordonate " << endl;
-                    cout << "3.7. Aplicatia 3: Verificarea parantezelor intr-o expresie aritmetica " << endl;
+                    cout << "3.2. Aplicatie: Lista simplu inlantuite ordonata din citire" << endl;
+                    cout << "3.3. Liste dublu inlantuite " << endl;
+                    cout << "3.4. Stive " << endl;
+                    cout << "3.5. Cozi " << endl;
+                    cout << "3.6. Aplicatia 1: Adunarea si inmultirea a doua polinoame " << endl;
+                    cout << "3.7. Aplicatia 2: Interclasarea a doua liste ordonate " << endl;
+                    cout << "3.8. Aplicatia 3: Verificarea parantezelor intr-o expresie aritmetica " << endl;
                     cout << "3.0. Exit liste dinamice!" << endl;
 
-
-                    cout << "Optiune algoritmi de sortare: ";
+                    cout << "Optiune liste dinamice: ";
                     cin >> op3;
-                    switch (op2) {
+                    switch (op3) {
                         case 1: //liste simplu inlatuite
                         {
+                            numar *lista;
+                            // creare lista
+                            lista = creare_lista();
+                            cout << "Lista dupa creare este: ";
+                            parcurgere_lista(lista);
+                            cout << endl;
+                            // adaugare in lista
+                            int ad;
+                            cout << "citeste valoare de adaugat: ";
+                            cin >> ad;
+                            lista = adaugare_in_lista(lista, ad);
+                            cout << "Lista dupa adaugare este: ";
+                            parcurgere_lista(lista);
+                            cout << endl;
+                            // stergere din lista
+                            lista = stergere_din_lista(lista);
+                            cout << "Lista dupa stergere este: ";
+                            parcurgere_lista(lista);
+                            cout << endl;
+                            // modificare element in lista
+                            int y, w;
+                            cout << "Modificare a elementului y = ";
+                            cin >> y;
+                            cout << "cu valoarea w = ";
+                            cin >> w;
+                            lista = modificare_in_lista(lista, y, w);
+                            cout << "Lista dupa modificare este: ";
+                            parcurgere_lista(lista);
+                            cout << endl;
+                            break;
                         }
-                        break;
 
                         case 2:
                             // Liste dublu inlatuite
