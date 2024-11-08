@@ -10,6 +10,17 @@ struct numar {
     numar *urm; // legatura catre urmatorul element din lista
 }; // structura elemente lista simplu inlantuita
 
+struct numar2 {
+    int v;
+    numar2 *urm;
+    numar2 *prec;
+};
+
+struct lista2 {
+    numar2 *prim;
+    numar2 *ultim;
+};
+
 // ########################  CAOPITOLUL 1: PROBLEME DIVERSE  ########################
 
 void ec2(float a, float b, float c) {
@@ -284,6 +295,8 @@ void CautareBinara(int s, int d, float x[100], float y) {
 
 // ########################  CAOPITOLUL 3: Liste dinamice  ########################
 
+// Liste simplu inlantuite
+
 numar *creare_lista() {
     numar *cap, *u, *c;
     int x, n;
@@ -451,6 +464,62 @@ numar *modificare_in_lista(numar *cap, int y, int w) {
             c->v = w;
     }
     return cap;
+}
+
+// Liste dublu inlantuite
+
+lista2 *creare_lista2() {
+    lista2 *L = nullptr;
+    int x, n;
+    cout<<"Introduceti primul element din lista: ";
+    cin>>x;
+    auto *p = new numar2;
+    auto *u = new numar2;
+    p->v = x;
+    p->prec = NULL;
+    p->urm = NULL;
+    L->prim = p;
+    L->ultim = p;
+    cout<<"Introduceti numarul de elemente din lista: ";
+    cin>>n;
+    for(int i = 1; i <= n; i++) {
+        cout<<"Introduceti elementul "<<i<<" din lista: ";
+        cin>>x;
+        auto *c = new numar2;
+        c->v = x;
+        c->urm = NULL;
+        c->prec = u;
+        u->urm = c;
+        u = c;
+    }
+    L->ultim = u;
+    return L;
+}
+
+void parcurgere_lista2_directa(lista2 *L) {
+    numar2 *c;
+    c = L->prim;
+    if(c==NULL)
+        cout<<"Lista este vida!";
+    else {
+        while(c!=NULL) {
+            cout<<c->v<<" ";
+            c = c->urm;
+        }
+    }
+}
+
+void parcurgere_lista2_inversa(lista2 *L) {
+    numar2 *c;
+    c = L->ultim;
+    if(c==NULL)
+        cout<<"Lista este vida!";
+    else {
+        while(c!=NULL) {
+            cout<<c->v<<" ";
+            c = c->prec;
+        }
+    }
 }
 
 int main() // PROGRAM PRINCIPAL
@@ -751,12 +820,22 @@ int main() // PROGRAM PRINCIPAL
                             cout << "Lista dupa modificare este: ";
                             parcurgere_lista(lista);
                             cout << endl;
-                            break;
                         }
+                        break;
 
                         case 2:
                             // Liste dublu inlatuite
                         {
+
+                        }
+                        break;
+
+                        case 3: // Liste dublu inlatuite
+                        {
+                            lista2 *lista;
+                            lista = creare_lista2();
+                            cout << "Lista dublu inlantuita este: ";
+                            parcurgere_lista2(lista);
                         }
                         break;
 
