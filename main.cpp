@@ -469,30 +469,30 @@ numar *modificare_in_lista(numar *cap, int y, int w) {
 // Liste dublu inlantuite
 
 lista2 *creare_lista2() {
-    lista2 *L = nullptr;
+    lista2 *L;
+    L = new lista2;
+    L->prim = NULL;
+    L->ultim = NULL;
     int x, n;
-    cout<<"Introduceti primul element din lista: ";
-    cin>>x;
-    auto *p = new numar2;
-    auto *u = new numar2;
-    p->v = x;
-    p->prec = NULL;
-    p->urm = NULL;
-    L->prim = p;
-    L->ultim = p;
-    cout<<"Introduceti numarul de elemente din lista: ";
-    cin>>n;
-    for(int i = 1; i <= n; i++) {
-        cout<<"Introduceti elementul "<<i<<" din lista: ";
-        cin>>x;
-        auto *c = new numar2;
+    cout << "Creare lista dublu inlantuita!" << endl;
+    cout << "Numarul de elemente care se adauga in lista la cearea listei n = ";
+    cin >> n;
+    for (int i = 1; i <= n; i++) {
+        cout << "Valoare de adaugat in lista x = ";
+        cin >> x;
+        numar2 *c;
+        c = new numar2;
         c->v = x;
         c->urm = NULL;
-        c->prec = u;
-        u->urm = c;
-        u = c;
+        c->prec = L->ultim;
+        if (L->prim == NULL) {
+            L->prim = c;
+            L->ultim = c;
+        } else {
+            L->ultim->urm = c;
+            L->ultim = c;
+        }
     }
-    L->ultim = u;
     return L;
 }
 
@@ -520,6 +520,142 @@ void parcurgere_lista2_inversa(lista2 *L) {
             c = c->prec;
         }
     }
+}
+
+lista2 *adaugare_in_lista2(lista2 *L, int a) {
+    int opa;
+    numar2 *p;
+    do {
+        cout << endl << "Tip adaugare:" << endl;
+        cout << "1. Adaugare la inceput de lista:" << endl;
+        cout << "2. Adaugare dupa element din interiorul listei:" << endl;
+        cout << "3. Adaugare la sfarsitul listei:" << endl;
+        cout << "0. Incheiere adaugare!" << endl;
+        cout << "Optiune adaugare: ";
+        cin >> opa;
+        switch (opa) {
+            case 1: // adauga la inceput
+                p = new numar2;
+            p->v = a;
+            p->urm = L->prim;
+            p->prec = NULL;
+            L->prim->prec = p;
+            L->prim = p;
+            parcurgere_lista2_directa(L);
+            cout << endl;
+            break;
+            case 2: // adauga dupa elemnet cu valoare dat din lista
+                // citim valoarea dupa care se adauga
+                    int y;
+            numar2 *c; // c - elementul curent din lista
+            cout << "Valoare dupa care se face adaugarea y = ";
+            cin >> y;
+            c = L->prim;
+            while (c != NULL) {
+                if (c->v == y) {
+                    // adauga valoare a dupa y
+                    if (c->urm == NULL) // c este ultimul element din lista
+                    {
+                        p = new numar2;
+                        p->v = a;
+                        p->urm = NULL;
+                        p->prec = c;
+                        c->urm = p;
+                        c = c->urm;
+                    } else // c se afla in interiorul listei
+                    {
+                        p = new numar2;
+                        p->v = a;
+                        p->urm = c->urm;
+                        p->prec = c;
+                        c->urm->prec = p;
+                        c->urm = p;
+                        c = c->urm;
+                    }
+                }
+                c = c->urm;
+            } // end while *c
+            parcurgere_lista2_directa(L);
+            cout<<endl;
+            break;
+            case 3: // adauga la sfarsitul la listei
+                numar2 *u;
+            u = L->prim;
+            while(u->urm != NULL)
+                u = u->urm;
+            p = new numar2;
+            p->v = a;
+            p->urm = NULL;
+            p->prec = u;
+            u->urm = p;
+            L->ultim = p;
+            parcurgere_lista2_directa(L);
+            cout<<endl;
+            break;
+            case 0:
+                cout << "incheiat adaugare!" << endl;
+            break;
+            default:
+                cout<<"Optiune invalida!"<<endl;
+            break;
+        }
+    }while (opa);
+    return L;
+}
+
+lista2 *stergere_din_lista2(lista2 *L) {
+    int cont = 0;
+    int s;
+    numar2 *c;
+    do {
+        if(L->prim == NULL)
+            cout<<"Lista este vida! Nu sunt valori de sters!"<<endl;
+        else {
+            //sterge elementul cu valoarea s de cate ori apare in lista
+            cout<<"Valoare de sters s = ";
+            cin>>s;
+            int nrs = 0; // numara de cate ori am sters s din lista
+            // stergem valoarea s daca se afla la inceput la lista
+            while(L->prim->v == s) {
+                L->prim = L->prim->urm;
+                L->prim->prec = NULL;
+                nrs++;
+                if(L->prim == NULL)
+                    break;
+            }
+            if(L->prim != NULL) {
+                c = L->prim->urm;
+                while(c != NULL) {
+                    if(c->v == s) {
+                        // sterge din lista pe c
+                        c->prec->urm = c->urm;
+                        if(c->urm != NULL)
+                            c->urm->prec = c->prec;
+                        nrs++;
+                        c = c->urm;
+                    } else {
+                        c = c->urm;
+                    }
+                }
+            }
+            cout<<"Elementul de sters "<<s<<" a fost sters de "<<nrs<<" ori"<<endl;
+            cout<<"Lista ramasa este: ";
+            parcurgere_lista2_directa(L);
+            cout<<endl;
+        }
+        cout<<"Continua stergerea [0/1]? ";
+        cin>>cont;
+    }while(cont);
+    return L;
+}
+
+lista2 *modificare_in_lista2(lista2 *L, int y, int w) {
+    numar2 *c;
+    for(c = L->prim; c != NULL; c = c->urm) {
+        if(c->v == y)
+            c->v = w;
+    }
+    return L;
 }
 
 int main() // PROGRAM PRINCIPAL
@@ -833,9 +969,37 @@ int main() // PROGRAM PRINCIPAL
                         case 3: // Liste dublu inlatuite
                         {
                             lista2 *lista;
+                            // creare lista
                             lista = creare_lista2();
-                            cout << "Lista dublu inlantuita este: ";
-                            parcurgere_lista2(lista);
+                            cout << "Lista dupa creare, parcursa direct, este: ";
+                            parcurgere_lista2_directa(lista);
+                            cout << endl;
+                            cout << "Lista dupa creare, parcursa invers, este: ";
+                            parcurgere_lista2_inversa(lista);
+                            cout << endl;
+                            // adaugare in lista
+                            int ad;
+                            cout << "citeste valoare de adaugat: ";
+                            cin >> ad;
+                            lista = adaugare_in_lista2(lista, ad);
+                            cout << "Lista dupa adaugare este: ";
+                            parcurgere_lista2_directa(lista);
+                            cout << endl;
+                            // stergere din lista
+                            lista = stergere_din_lista2(lista);
+                            cout << "Lista dupa stergere este: ";
+                            parcurgere_lista2_directa(lista);
+                            cout << endl;
+                            // modificare element in lista
+                            int y, w;
+                            cout << "Modificare a elementului y = ";
+                            cin >> y;
+                            cout << "cu valoarea w = ";
+                            cin >> w;
+                            lista = modificare_in_lista2(lista, y, w);
+                            cout << "Lista dupa modificare este: ";
+                            parcurgere_lista2_directa(lista);
+                            cout << endl;
                         }
                         break;
 
