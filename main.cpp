@@ -466,6 +466,41 @@ numar *modificare_in_lista(numar *cap, int y, int w) {
     return cap;
 }
 
+//lista simplu inlantuita ordonata din citire
+numar *creare_lista_ordonata() {
+    numar *cap, *u, *c;
+    int x, n;
+    cout << "creare lista ordonata!" << endl;
+    // creare capat lista
+    cout << "Valoare cap lista x = ";
+    cin >> x;
+    cap = new numar;
+    cap->v = x;
+    cap->urm = NULL;
+    u = cap; // ultimul element din lista
+    cout << "Numarul de elemente care se adauga in lista la cearea listei n = ";
+    cin >> n;
+    for (int i = 1; i <= n; i++) {
+        cout << "Valoare de adaugat in lista x = ";
+        cin >> x;
+        c = new numar;
+        c->v = x;
+        c->urm = NULL;
+        if (x < cap->v) {
+            c->urm = cap;
+            cap = c;
+        } else {
+            numar *p;
+            p = cap;
+            while (p->urm != NULL && p->urm->v < x)
+                p = p->urm;
+            c->urm = p->urm;
+            p->urm = c;
+        }
+    }
+    return cap;
+}
+
 // Liste dublu inlantuite
 
 lista2 *creare_lista2() {
@@ -656,6 +691,31 @@ lista2 *modificare_in_lista2(lista2 *L, int y, int w) {
             c->v = w;
     }
     return L;
+}
+
+// Stive
+
+numar *creare_stiva() {
+    numar *c, *d;
+    int x, n;
+    cout << "creare stiva!" << endl;
+    // creare capat stiva
+    cout << "Introduceti primul element din stiva, x = ";
+    cin >> x;
+    c = new numar;
+    c->v = x;
+    c->urm = NULL;
+    cout << "Numarul de elemente care se adauga in stiva la crearea stivei n = ";
+    cin >> n;
+    for (int i = 1; i <= n; i++) {
+        cout << "Valoare de adaugat in stiva x = ";
+        cin >> x;
+        d = new numar;
+        d->v = x;
+        d->urm = c;
+        c = d;
+    }
+    return c;
 }
 
 int main() // PROGRAM PRINCIPAL
@@ -960,9 +1020,37 @@ int main() // PROGRAM PRINCIPAL
                         break;
 
                         case 2:
-                            // Liste dublu inlatuite
+                            // Creare lista ordonata din citire
                         {
-
+                            numar *lista;
+                            // creare lista
+                            lista = creare_lista_ordonata();
+                            cout << "Lista dupa creare este: ";
+                            parcurgere_lista(lista);
+                            cout << endl;
+                            // adaugare in lista
+                            int ad;
+                            cout << "citeste valoare de adaugat: ";
+                            cin >> ad;
+                            lista = adaugare_in_lista(lista, ad);
+                            cout << "Lista dupa adaugare este: ";
+                            parcurgere_lista(lista);
+                            cout << endl;
+                            // stergere din lista
+                            lista = stergere_din_lista(lista);
+                            cout << "Lista dupa stergere este: ";
+                            parcurgere_lista(lista);
+                            cout << endl;
+                            // modificare element in lista
+                            int y, w;
+                            cout << "Modificare a elementului y = ";
+                            cin >> y;
+                            cout << "cu valoarea w = ";
+                            cin >> w;
+                            lista = modificare_in_lista(lista, y, w);
+                            cout << "Lista dupa modificare este: ";
+                            parcurgere_lista(lista);
+                            cout << endl;
                         }
                         break;
 
@@ -1000,6 +1088,11 @@ int main() // PROGRAM PRINCIPAL
                             cout << "Lista dupa modificare este: ";
                             parcurgere_lista2_directa(lista);
                             cout << endl;
+                        }
+                        break;
+
+                        case 4: {
+
                         }
                         break;
 
