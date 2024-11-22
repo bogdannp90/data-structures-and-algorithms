@@ -501,6 +501,27 @@ numar *creare_lista_ordonata() {
     return cap;
 }
 
+numar *adaugare_in_lista_ordonat(numar *cap, int a) {
+    // adaugare element in lista ordonata
+    numar *p;
+    if (a < cap->v) {
+        p = new numar;
+        p->v = a;
+        p->urm = cap;
+        cap = p;
+    } else {
+        numar *c;
+        c = cap;
+        while (c->urm != NULL && c->urm->v < a)
+            c = c->urm;
+        p = new numar;
+        p->v = a;
+        p->urm = c->urm;
+        c->urm = p;
+    }
+    return cap;
+}
+
 // Liste dublu inlantuite
 
 lista2 *creare_lista2() {
@@ -1030,25 +1051,15 @@ int main() // PROGRAM PRINCIPAL
                             cout << endl;
                             // adaugare in lista
                             int ad;
-                            cout << "citeste valoare de adaugat: ";
+                            cout << "Citeste valoare de adaugat in lista: ";
                             cin >> ad;
-                            lista = adaugare_in_lista(lista, ad);
+                            lista = adaugare_in_lista_ordonat(lista, ad);
                             cout << "Lista dupa adaugare este: ";
                             parcurgere_lista(lista);
                             cout << endl;
                             // stergere din lista
                             lista = stergere_din_lista(lista);
                             cout << "Lista dupa stergere este: ";
-                            parcurgere_lista(lista);
-                            cout << endl;
-                            // modificare element in lista
-                            int y, w;
-                            cout << "Modificare a elementului y = ";
-                            cin >> y;
-                            cout << "cu valoarea w = ";
-                            cin >> w;
-                            lista = modificare_in_lista(lista, y, w);
-                            cout << "Lista dupa modificare este: ";
                             parcurgere_lista(lista);
                             cout << endl;
                         }
