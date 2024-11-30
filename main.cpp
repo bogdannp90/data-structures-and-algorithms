@@ -555,11 +555,10 @@ lista2 *creare_lista2() {
 void parcurgere_lista2_directa(lista2 *L) {
     numar2 *c;
     c = L->prim;
-    if(c==NULL)
-        cout<<"Lista este vida!";
+    if (c == NULL) {cout << "Lista este vida!";}
     else {
-        while(c!=NULL) {
-            cout<<c->v<<" ";
+        while (c != NULL) {
+            cout << c->v << " ";
             c = c->urm;
         }
     }
@@ -568,11 +567,11 @@ void parcurgere_lista2_directa(lista2 *L) {
 void parcurgere_lista2_inversa(lista2 *L) {
     numar2 *c;
     c = L->ultim;
-    if(c==NULL)
-        cout<<"Lista este vida!";
+    if (c == NULL)
+        cout << "Lista este vida!";
     else {
-        while(c!=NULL) {
-            cout<<c->v<<" ";
+        while (c != NULL) {
+            cout << c->v << " ";
             c = c->prec;
         }
     }
@@ -592,70 +591,70 @@ lista2 *adaugare_in_lista2(lista2 *L, int a) {
         switch (opa) {
             case 1: // adauga la inceput
                 p = new numar2;
-            p->v = a;
-            p->urm = L->prim;
-            p->prec = NULL;
-            L->prim->prec = p;
-            L->prim = p;
-            parcurgere_lista2_directa(L);
-            cout << endl;
-            break;
+                p->v = a;
+                p->urm = L->prim;
+                p->prec = NULL;
+                L->prim->prec = p;
+                L->prim = p;
+                parcurgere_lista2_directa(L);
+                cout << endl;
+                break;
             case 2: // adauga dupa elemnet cu valoare dat din lista
                 // citim valoarea dupa care se adauga
-                    int y;
-            numar2 *c; // c - elementul curent din lista
-            cout << "Valoare dupa care se face adaugarea y = ";
-            cin >> y;
-            c = L->prim;
-            while (c != NULL) {
-                if (c->v == y) {
-                    // adauga valoare a dupa y
-                    if (c->urm == NULL) // c este ultimul element din lista
-                    {
-                        p = new numar2;
-                        p->v = a;
-                        p->urm = NULL;
-                        p->prec = c;
-                        c->urm = p;
-                        c = c->urm;
-                    } else // c se afla in interiorul listei
-                    {
-                        p = new numar2;
-                        p->v = a;
-                        p->urm = c->urm;
-                        p->prec = c;
-                        c->urm->prec = p;
-                        c->urm = p;
-                        c = c->urm;
+                int y;
+                numar2 *c; // c - elementul curent din lista
+                cout << "Valoare dupa care se face adaugarea y = ";
+                cin >> y;
+                c = L->prim;
+                while (c != NULL) {
+                    if (c->v == y) {
+                        // adauga valoare a dupa y
+                        if (c->urm == NULL) // c este ultimul element din lista
+                        {
+                            p = new numar2;
+                            p->v = a;
+                            p->urm = NULL;
+                            p->prec = c;
+                            c->urm = p;
+                            c = c->urm;
+                        } else // c se afla in interiorul listei
+                        {
+                            p = new numar2;
+                            p->v = a;
+                            p->urm = c->urm;
+                            p->prec = c;
+                            c->urm->prec = p;
+                            c->urm = p;
+                            c = c->urm;
+                        }
                     }
-                }
-                c = c->urm;
-            } // end while *c
-            parcurgere_lista2_directa(L);
-            cout<<endl;
-            break;
+                    c = c->urm;
+                } // end while *c
+                parcurgere_lista2_directa(L);
+                cout << endl;
+                break;
             case 3: // adauga la sfarsitul la listei
                 numar2 *u;
-            u = L->prim;
-            while(u->urm != NULL)
-                u = u->urm;
-            p = new numar2;
-            p->v = a;
-            p->urm = NULL;
-            p->prec = u;
-            u->urm = p;
-            L->ultim = p;
-            parcurgere_lista2_directa(L);
-            cout<<endl;
-            break;
+                u = L->prim;
+                while (u->urm != NULL)
+                    u = u->urm;
+                p = new numar2;
+                p->v = a;
+                p->urm = NULL;
+                p->prec = u;
+                u->urm = p;
+                L->ultim = p;
+                parcurgere_lista2_directa(L);
+                cout << endl;
+                break;
             case 0:
                 cout << "incheiat adaugare!" << endl;
-            break;
+                break;
             default:
-                cout<<"Optiune invalida!"<<endl;
-            break;
+                cout << "Optiune invalida!" << endl;
+                break;
         }
-    }while (opa);
+    } while (opa);
     return L;
 }
 
@@ -664,28 +663,28 @@ lista2 *stergere_din_lista2(lista2 *L) {
     int s;
     numar2 *c;
     do {
-        if(L->prim == NULL)
-            cout<<"Lista este vida! Nu sunt valori de sters!"<<endl;
+        if (L->prim == NULL)
+            cout << "Lista este vida! Nu sunt valori de sters!" << endl;
         else {
             //sterge elementul cu valoarea s de cate ori apare in lista
-            cout<<"Valoare de sters s = ";
-            cin>>s;
+            cout << "Valoare de sters s = ";
+            cin >> s;
             int nrs = 0; // numara de cate ori am sters s din lista
             // stergem valoarea s daca se afla la inceput la lista
-            while(L->prim->v == s) {
+            while (L->prim->v == s) {
                 L->prim = L->prim->urm;
                 L->prim->prec = NULL;
                 nrs++;
-                if(L->prim == NULL)
+                if (L->prim == NULL)
                     break;
             }
-            if(L->prim != NULL) {
+            if (L->prim != NULL) {
                 c = L->prim->urm;
-                while(c != NULL) {
-                    if(c->v == s) {
+                while (c != NULL) {
+                    if (c->v == s) {
                         // sterge din lista pe c
                         c->prec->urm = c->urm;
-                        if(c->urm != NULL)
+                        if (c->urm != NULL)
                             c->urm->prec = c->prec;
                         nrs++;
                         c = c->urm;
@@ -694,21 +693,21 @@ lista2 *stergere_din_lista2(lista2 *L) {
                     }
                 }
             }
-            cout<<"Elementul de sters "<<s<<" a fost sters de "<<nrs<<" ori"<<endl;
-            cout<<"Lista ramasa este: ";
+            cout << "Elementul de sters " << s << " a fost sters de " << nrs << " ori" << endl;
+            cout << "Lista ramasa este: ";
             parcurgere_lista2_directa(L);
-            cout<<endl;
+            cout << endl;
         }
-        cout<<"Continua stergerea [0/1]? ";
-        cin>>cont;
-    }while(cont);
+        cout << "Continua stergerea [0/1]? ";
+        cin >> cont;
+    } while (cont);
     return L;
 }
 
 lista2 *modificare_in_lista2(lista2 *L, int y, int w) {
     numar2 *c;
-    for(c = L->prim; c != NULL; c = c->urm) {
-        if(c->v == y)
+    for (c = L->prim; c != NULL; c = c->urm) {
+        if (c->v == y)
             c->v = w;
     }
     return L;
@@ -719,7 +718,7 @@ lista2 *modificare_in_lista2(lista2 *L, int y, int w) {
 numar *creare_stiva() {
     numar *c, *d;
     int x, n;
-    cout << "creare stiva!" << endl;
+    cout << "Creare stiva!" << endl;
     // creare capat stiva
     cout << "Introduceti primul element din stiva, x = ";
     cin >> x;
@@ -738,6 +737,112 @@ numar *creare_stiva() {
     }
     return c;
 }
+
+void parcurgere_stiva(numar *cap) {
+    numar *s;
+    if (cap == NULL)
+        cout << "Stiva este vida!" << endl;
+    else {
+        s = cap;
+        while (s != NULL) {
+            cout << s->v << " ";
+            s = s->urm;
+        }
+    }
+}
+
+numar *adaugare_in_stiva(numar *c, int x) {
+    numar *d;
+    d = new numar;
+    d->v = x;
+    d->urm = c;
+    return d;
+}
+
+numar *stergere_din_stiva(numar *cap) {
+    numar *c;
+    if (cap == NULL)
+        cout << "Stiva este vida! Nu sunt valori de sters!" << endl;
+    else {
+        c->v = cap->urm->v;
+        c->urm = cap->urm->urm;
+        delete cap;
+    }
+    return c;
+}
+
+// ########################  CAOPITOLUL 4: Cozi  ########################
+
+lista2 *creare_coada() {
+    lista2 *L;
+    L = new lista2;
+    L->prim = NULL;
+    L->ultim = NULL;
+    int x, n;
+    cout << "Creare coada!" << endl;
+    cout << "Numarul de elemente care se adauga in coada: n = ";
+    cin >> n;
+    for (int i = 1; i <= n; i++) {
+        cout << "Valoare de adaugat in coada: x = ";
+        cin >> x;
+        numar2 *c;
+        c = new numar2;
+        c->v = x;
+        c->urm = NULL;
+        c->prec = L->ultim;
+        if (L->prim == NULL) {
+            L->prim = c;
+            L->ultim = c;
+        } else {
+            L->ultim->urm = c;
+            L->ultim = c;
+        }
+    }
+    return L;
+}
+
+lista2 *adaugare_in_coada(lista2 *L, int x) {
+    numar2 *c;
+    c = new numar2;
+    c->v = x;
+    c->urm = NULL;
+    c->prec = L->ultim;
+    if (L->prim == NULL) {
+        L->prim = c;
+        L->ultim = c;
+    } else {
+        L->ultim->urm = c;
+        L->ultim = c;
+    }
+    return L;
+}
+
+lista2 *stergere_din_coada(lista2 *L) {
+    if (L->prim == NULL)
+        cout << "Coada este vida! Nu sunt valori de sters!" << endl;
+    else {
+        ((L->prim)->urm)->prec = NULL;
+        L->prim = (L->prim)->urm;
+    }
+    return L;
+}
+
+void parcurgere_coada(lista2 *L) {
+    numar2 *c;
+    c = L->prim;
+    if (c == NULL)
+        cout << "Coada este vida!";
+    else {
+        while (c != NULL) {
+            cout << c->v << " ";
+            c = c->urm;
+        }
+    }
+}
+
+
+// ########################  CAOPITOLUL 4: Grafuri  ########################
+
 
 int main() // PROGRAM PRINCIPAL
 {
@@ -1051,12 +1156,16 @@ int main() // PROGRAM PRINCIPAL
                             cout << endl;
                             // adaugare in lista
                             int ad;
-                            cout << "Citeste valoare de adaugat in lista: ";
+                            cout << "Vrei sa adaugi elemente in lista ordonata? [0/1] ";
                             cin >> ad;
-                            lista = adaugare_in_lista_ordonat(lista, ad);
-                            cout << "Lista dupa adaugare este: ";
-                            parcurgere_lista(lista);
-                            cout << endl;
+                            if (ad > 0) {
+                                cout << "Citeste valoare de adaugat in lista: ";
+                                cin >> ad;
+                                lista = adaugare_in_lista_ordonat(lista, ad);
+                                cout << "Lista dupa adaugare este: ";
+                                parcurgere_lista(lista);
+                                cout << endl;
+                            }
                             // stergere din lista
                             lista = stergere_din_lista(lista);
                             cout << "Lista dupa stergere este: ";
@@ -1102,7 +1211,62 @@ int main() // PROGRAM PRINCIPAL
                         }
                         break;
 
-                        case 4: {
+                        case 4: //Stive
+                            {
+                                numar *stiva;
+                                // creare stiva
+                                stiva = creare_stiva();
+                                cout << "Stiva dupa creare este: ";
+                                parcurgere_stiva(stiva);
+                                cout << endl;
+                                // adaugare in stiva
+                                int ad,op;
+                                cout << "Citeste valoare de adaugat: ";
+                                cin >> ad;
+                                stiva = adaugare_in_stiva(stiva, ad);
+                                cout << "Stiva dupa adaugare este: ";
+                                parcurgere_stiva(stiva);
+                                cout << endl;
+                                // stergere din stiva
+                                cout<<"Cate elemente doresti sa stergi din stiva? n = ";
+                                cin>>op;
+                                for(int i=0;i<op;i++)
+                                    stiva = stergere_din_stiva(stiva);
+                                parcurgere_stiva(stiva);
+                                cout << endl;
+                        }
+                        break;
+
+                        case 5: //Cozi
+                            {
+                                lista2 *coada;
+                                // creare coada
+                                coada = creare_coada();
+                                cout << "Coada dupa creare este: ";
+                                parcurgere_coada(coada);
+                                cout << endl;
+                                // adaugare in coada
+                                int ad;
+                                cout << "Citeste valoare de adaugat: ";
+                                cin >> ad;
+                                coada = adaugare_in_coada(coada, ad);
+                                cout << "Coada dupa adaugare este: ";
+                                parcurgere_coada(coada);
+                                cout << endl;
+                                // stergere din coada
+                                cout<<"Cate elemente doresti sa stergi din coada? n = ";
+                                int n;
+                                cin>>n;
+                                for(int i=0;i<n;i++)
+                                    coada = stergere_din_coada(coada);
+                                cout << "Coada dupa stergere este: ";
+                                parcurgere_coada(coada);
+                                cout << endl;
+                            }
+                            break;
+
+                        case 6: //
+                            {
 
                         }
                         break;
