@@ -760,14 +760,14 @@ numar *adaugare_in_stiva(numar *c, int x) {
 }
 
 numar *stergere_din_stiva(numar *cap) {
-    numar *c;
-    if (cap == NULL)
+    numar *c = nullptr;
+    if (cap == NULL){
         cout << "Stiva este vida! Nu sunt valori de sters!" << endl;
-    else {
-        c->v = cap->urm->v;
-        c->urm = cap->urm->urm;
-        delete cap;
+        return NULL;
     }
+    c = cap->urm;
+    c->v = (cap->urm)->v;
+    delete cap;
     return c;
 }
 
