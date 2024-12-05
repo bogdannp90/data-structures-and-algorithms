@@ -21,6 +21,12 @@ struct lista2 {
     numar2 *ultim;
 };
 
+struct monom {
+    int grad;
+    float coef;
+    monom *urm;
+};
+
 // ########################  CAOPITOLUL 1: PROBLEME DIVERSE  ########################
 
 void ec2(float a, float b, float c) {
@@ -470,7 +476,6 @@ numar *modificare_in_lista(numar *cap, int y, int w) {
 numar *creare_lista_ordonata() {
     numar *cap, *u, *c;
     int x, n;
-    cout << "creare lista ordonata!" << endl;
     // creare capat lista
     cout << "Valoare cap lista x = ";
     cin >> x;
@@ -771,7 +776,7 @@ numar *stergere_din_stiva(numar *cap) {
     return c;
 }
 
-// ########################  CAOPITOLUL 4: Cozi  ########################
+// ########################  CAOPITOLUL 3: Cozi  ########################
 
 lista2 *creare_coada() {
     lista2 *L;
@@ -838,6 +843,147 @@ void parcurgere_coada(lista2 *L) {
             c = c->urm;
         }
     }
+}
+
+// ########################  CAOPITOLUL 3: Interclasarea a doua liste ordonate  ########################
+
+numar *interclasare_liste(numar *L1, numar *L2) {
+    numar *L = new numar;
+    numar *p1, *p2;
+    if (L1->v < L2->v) {
+        L->v = L1->v;
+        L->urm = NULL;
+        p1 = L1->urm;
+        p2 = L2;
+    } else {
+        L->v = L2->v;
+        L->urm = NULL;
+        p1 = L1;
+        p2 = L2->urm;
+    }
+    numar *u = L;
+    numar *c;
+
+    while (p1 != NULL and p2 != NULL) {
+        c = new numar;
+        if (p1->v < p2->v) {
+            c->v = p1->v;
+            c->urm = NULL;
+            p1 = p1->urm;
+        } else {
+            c->v = p2->v;
+            c->urm = NULL;
+            p2 = p2->urm;
+        }
+        u->urm = c;
+        u = c;
+
+        if (p1!=NULL) {
+            while (p1!= NULL) {
+                c = new numar;
+                c->v = p1->v;
+                c->urm = NULL;
+                u->urm = c;
+                u = c;
+                p1 = p1->urm;
+            }
+            if (p2!=NULL) {
+                while (p2!= NULL) {
+                    c = new numar;
+                    c->v = p2->v;
+                    c->urm = NULL;
+                    u->urm = c;
+                    u = c;
+                    p2 = p2->urm;
+                }
+            }
+        }
+        return L;
+    }
+}
+
+// ########################  CAOPITOLUL 3: Adunarea si inmultirea a doua polinoame  ########################
+
+monom *crearePolinom() {
+    monom *p;
+    p = new monom;
+    p->coef = 0;
+    p->grad = 0;
+    p->urm = NULL;
+    int n;
+    cout << "Numarul de monoame care se adauga in polinom n = ";
+    cin >> n;
+    for (int i = 1; i <= n; i++) {
+        monom *c;
+        c = new monom;
+        cout << "Introduceti coeficientul si gradul monomului: ";
+        cin >> c->coef;
+        cout << "x^";
+        cin >> c->grad;
+        c->urm = NULL;
+        if (p->urm == NULL) {
+            p->urm = c;
+        } else {
+            monom *u;
+            u = p;
+            while (u->urm != NULL)
+                u = u->urm;
+            u->urm = c;
+        }
+    }
+    return p;
+}
+
+void adunarePolinoame(monom *p1, monom *p2) {
+    monom *p3 = new monom;
+    monom *c1 = p1->urm;
+    monom *c2 = p2->urm;
+    monom *c3 = p3;
+    while (c1 != NULL and c2 != NULL) {
+        if (c1->grad == c2->grad) {
+            c3->coef = c1->coef + c2->coef;
+            c3->grad = c1->grad;
+            c1 = c1->urm;
+            c2 = c2->urm;
+        } else if (c1->grad > c2->grad) {
+            c3->coef = c1->coef;
+            c3->grad = c1->grad;
+            c1 = c1->urm;
+        } else {
+            c3->coef = c2->coef;
+            c3->grad = c2->grad;
+            c2 = c2->urm;
+        }
+        c3->urm = new monom;
+        c3 = c3->urm;
+        c3->urm = NULL;
+    }
+    if (c1 != NULL) {
+        while (c1 != NULL) {
+            c3->coef = c1->coef;
+            c3->grad = c1->grad;
+            c1 = c1->urm;
+            c3->urm = new monom;
+            c3 = c3->urm;
+            c3->urm = NULL;
+        }
+    }
+    if (c2 != NULL) {
+        while (c2 != NULL) {
+            c3->coef = c2->coef;
+            c3->grad = c2->grad;
+            c2 = c2->urm;
+            c3->urm = new monom;
+            c3 = c3->urm;
+            c3->urm = NULL;
+        }
+    }
+    c3 = p3;
+    while (c3->urm->urm != NULL) {
+        cout << c3->coef << "x^" << c3->grad << " + ";
+        c3 = c3->urm;
+    }
+    cout << c3->coef << "x^" << c3->grad << endl;
 }
 
 
@@ -1150,6 +1296,7 @@ int main() // PROGRAM PRINCIPAL
                         {
                             numar *lista;
                             // creare lista
+                            cout << "Creare lista ordonata!" << endl;
                             lista = creare_lista_ordonata();
                             cout << "Lista dupa creare este: ";
                             parcurgere_lista(lista);
@@ -1266,6 +1413,44 @@ int main() // PROGRAM PRINCIPAL
                             break;
 
                         case 6: //
+                            {
+                            //Adunare polinoame
+                            monom *p1, *p2;
+                            cout << "Introduceti primul polinom: ";
+                            p1 = crearePolinom();
+                            cout << "Introduceti al doilea polinom: ";
+                            p2 = crearePolinom();
+                            cout << "Rezultatul adunarii polinoamelor este: ";
+                            adunarePolinoame(p1, p2);
+
+                        }
+                        break;
+
+                        case 7: //
+                            {
+                            numar *lista1,*lista2;
+                            // creare liste
+                            cout<<"Introduceti elementele primei liste! "<<endl;;
+                            lista1 = creare_lista_ordonata();
+                            cout << "Prima lista dupa creare este: ";
+                            parcurgere_lista(lista1);
+                            cout << endl;
+
+                            cout<<"Introduceti elementele celei de-a doua liste! "<<endl;;
+                            lista2 = creare_lista_ordonata();
+                            parcurgere_lista(lista2);
+                            cout << "A doua lista dupa creare este: ";
+                            cout << endl;
+
+                            //interclasare liste
+                            numar *lista = interclasare_liste(lista1, lista2);
+                            cout << "Lista interclasata este: ";
+                            parcurgere_lista(lista);
+                            cout << endl;
+                        }
+                        break;
+
+                        case 8: //
                             {
 
                         }
