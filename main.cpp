@@ -986,7 +986,69 @@ void adunarePolinoame(monom *p1, monom *p2) {
     cout << c3->coef << "x^" << c3->grad << endl;
 }
 
+void sorteazaPolinom(monom *p3) {
+    if (!p3 || !p3->urm) {
+        return; // Lista are mai puțin de 2 noduri - deja este sortată.
+    }
+    bool sortat;
+    do {
+        sortat = true;
+        monom* prev = NULL; // Pointer pentru nodul anterior.
+        monom* current = p3;  // Pointer pentru nodul curent.
+        while (current->urm != NULL) {
+            if (current->grad < current->urm->grad) {
+                // Schimbă nodurile current și current->urm.
+                sortat = false;
+                monom* next = current->urm;
+                current->urm = next->urm;
+                next->urm = current;
+                if (prev == NULL) {
+                    // Dacă schimbăm la începutul listei.
+                    p3 = next;
+                } else {
+                    // Dacă schimbăm în interiorul listei.
+                    prev->urm = next;
+                }
+                // Ajustează prev și current.
+                prev = next;
+            } else {
+                // Trecem la următorul nod.
+                prev = current;
+                current = current->urm;
+            }
+        }
+    } while (!sortat);
+}
 
+void inmulirePolinoame(monom *p1, monom *p2) {
+   //Functie pentru inmultirea a doua polinoame
+    monom *p3 = new monom;
+    monom *c1 = p1->urm;
+    monom *c2 = p2->urm;
+    monom *c3 = p3;
+    while (c1 != NULL) {
+        while (c2 != NULL) {
+            c3->coef = c1->coef * c2->coef;
+            c3->grad = c1->grad + c2->grad;
+            c2 = c2->urm;
+            c3->urm = new monom;
+            c3 = c3->urm;
+            c3->urm = NULL;
+        }
+        c1 = c1->urm;
+        c2 = p2->urm;
+    }
+    c3 = p3;
+
+    //Ordonarea polinomului rezultat
+    sorteazaPolinom(c3);
+    while (c3->urm->urm != NULL) {
+        cout << c3->coef << "x^" << c3->grad << " + ";
+        c3 = c3->urm;
+    }
+    cout << c3->coef << "x^" << c3->grad << endl;
+
+}
 // ########################  CAOPITOLUL 4: Grafuri  ########################
 
 
@@ -1416,12 +1478,16 @@ int main() // PROGRAM PRINCIPAL
                             {
                             //Adunare polinoame
                             monom *p1, *p2;
-                            cout << "Introduceti primul polinom: ";
+                            cout << "Introduceti primul polinom: "<<endl;
                             p1 = crearePolinom();
                             cout << "Introduceti al doilea polinom: ";
                             p2 = crearePolinom();
                             cout << "Rezultatul adunarii polinoamelor este: ";
                             adunarePolinoame(p1, p2);
+                            cout<<endl;
+                            //Inmultire polinoame
+                            cout << "Rezultatul inmultirii polinoamelor este: ";
+                            inmulirePolinoame(p1, p2);
 
                         }
                         break;
