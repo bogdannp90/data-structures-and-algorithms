@@ -908,6 +908,7 @@ numar *interclasare_liste(numar *L1, numar *L2) {
         }
         return L;
     }
+    return L;
 }
 
 // ########################  CAOPITOLUL 3: Adunarea si inmultirea a doua polinoame  ########################
@@ -1059,78 +1060,47 @@ void inmulirePolinoame(monom *p1, monom *p2) {
 
 // ########################  CAOPITOLUL 3: Verificarea parantezelor intr-o expresie aritmetica  ########################
 
-void parcurgereStivaCaractere(caracter *cap) {
-    caracter *s;
-    if (cap == NULL)
-        cout << "Stiva este vida!" << endl;
-    else {
-        s = cap;
-        while (s != NULL) {
-            cout << s->car << " ";
-            s = s->urm;
-        }
-    }
-}
-
-caracter *adaugareInStivaCaractere(caracter *c, char x) {
-    caracter *d;
-    d = new caracter;
-    d->car = x;
-    d->urm = c;
-    return d;
-}
-
 caracter *stergereDinStivaCaractere(caracter *cap) {
-    caracter *c = nullptr;
     if (cap == NULL){
         cout << "Stiva este vida! Nu sunt valori de sters!" << endl;
         return NULL;
     }
-    c = cap->urm;
-    c->car = (cap->urm)->car;
+    caracter *c= cap->urm;
     delete cap;
     return c;
 }
 
-caracter *creareStivaCaractere() {
-    caracter *c, *d;
-    char sir[100];
-    char x;
-    cout << "Creare stiva!" << endl;
-    // creare capat stiva
-    cout << "Introduceti sirul de caractere pe care doriti sa il adaugati in stiva: ";
-    cin.getline(sir,100);
+bool verificareParanteze(const string sir){
+    caracter *paranteze = NULL;
 
-    for (int i=0; i<strlen(sir); i++) {
-        cout<<sir[i];
-    }
-    return c;
-}
-
-bool verificareParanteze(caracter *cap){
-    caracter *s;
-    s = cap;
-    caracter *paranteze = new caracter;
-    while (s != NULL) {
-        if (s->car == '(' || s->car == '[' || s->car == '{') {
-            paranteze = adaugareInStivaCaractere(paranteze, s->car);
-        } else if (s->car == ')' || s->car == ']' || s->car == '}') {
-            if (paranteze == NULL) {
-                return false;
-            }
-            if (s->car == ')' && paranteze->car != '(') {
-                return false;
-            }
-            if (s->car == ']' && paranteze->car != '[') {
-                return false;
-            }
-            if (s->car == '}' && paranteze->car != '{') {
-                return false;
-            }
-            paranteze = stergereDinStivaCaractere(paranteze);
+    for (int i=0; i<sir.length();i++) {
+        char c = sir[i]; // Caracterul curent
+        // Dacă este o paranteză deschisă, o adăugăm în stivă
+        if (c == '(' || c == '{' || c == '[') {
+            caracter *d = new caracter;
+            d->car = c;
+            d->urm = paranteze;
+            paranteze = d;
         }
-        s = s->urm;
+        // Dacă este o paranteză închisă
+        else if (c == ')' || c == '}' || c == ']') {
+            // Verificăm dacă stiva este goală sau paranteza nu se potrivește
+            if (paranteze == NULL) {
+                return false; // Nu există o paranteză deschisă pentru aceasta
+            }
+            char top = paranteze->car; // Paranteza de pe vârful stivei
+            paranteze = stergereDinStivaCaractere(paranteze); // Scoatem paranteza deschisă din stivă
+
+            // Verificăm dacă paranteza închisă se potrivește cu cea de pe vârful stivei
+            if ((c == ')' && top != '(') ||
+                (c == '}' && top != '{') ||
+                (c == ']' && top != '[')) {
+                return false; // Paranteza nu se potrivește
+                }
+        }
     }
+    // Verificăm dacă există paranteze deschise care nu au fost închise
+    return paranteze == NULL;
 }
 
 // ########################  CAOPITOLUL 4: Grafuri  ########################
@@ -1602,16 +1572,13 @@ int main() // PROGRAM PRINCIPAL
 
                         case 8: //
                             {
-                            caracter *stiva;
-                            // creare stiva
-                            stiva = creareStivaCaractere();
-                            cout << "Stiva dupa creare este: ";
-                            parcurgereStivaCaractere(stiva);
-                            cout << endl;
+                            string expresie;
+                            cout<<"Introduceti expresia: ";
+                            cin>>expresie;
 
                             //verificare paranteze
                             cout<<"Verificare paranteze: ";
-                            if(verificareParanteze(stiva))
+                            if(verificareParanteze(expresie))
                                 cout<<"Expresia este corecta!"<<endl;
                             else
                                 cout<<"Expresia nu este corecta!"<<endl;
