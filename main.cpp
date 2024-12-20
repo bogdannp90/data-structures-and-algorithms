@@ -1,6 +1,8 @@
 #include <algorithm>
 #include <iostream>
 #include <cmath>
+#include <string>
+#include <cstring>
 
 
 using namespace std;
@@ -26,6 +28,12 @@ struct monom {
     float coef;
     monom *urm;
 };
+
+struct caracter{
+    char car;
+    caracter *urm;
+};
+
 
 // ########################  CAOPITOLUL 1: PROBLEME DIVERSE  ########################
 
@@ -1047,8 +1055,84 @@ void inmulirePolinoame(monom *p1, monom *p2) {
         c3 = c3->urm;
     }
     cout << c3->coef << "x^" << c3->grad << endl;
-
 }
+
+// ########################  CAOPITOLUL 3: Verificarea parantezelor intr-o expresie aritmetica  ########################
+
+void parcurgereStivaCaractere(caracter *cap) {
+    caracter *s;
+    if (cap == NULL)
+        cout << "Stiva este vida!" << endl;
+    else {
+        s = cap;
+        while (s != NULL) {
+            cout << s->car << " ";
+            s = s->urm;
+        }
+    }
+}
+
+caracter *adaugareInStivaCaractere(caracter *c, char x) {
+    caracter *d;
+    d = new caracter;
+    d->car = x;
+    d->urm = c;
+    return d;
+}
+
+caracter *stergereDinStivaCaractere(caracter *cap) {
+    caracter *c = nullptr;
+    if (cap == NULL){
+        cout << "Stiva este vida! Nu sunt valori de sters!" << endl;
+        return NULL;
+    }
+    c = cap->urm;
+    c->car = (cap->urm)->car;
+    delete cap;
+    return c;
+}
+
+caracter *creareStivaCaractere() {
+    caracter *c, *d;
+    char sir[100];
+    char x;
+    cout << "Creare stiva!" << endl;
+    // creare capat stiva
+    cout << "Introduceti sirul de caractere pe care doriti sa il adaugati in stiva: ";
+    cin.getline(sir,100);
+
+    for (int i=0; i<strlen(sir); i++) {
+        cout<<sir[i];
+    }
+    return c;
+}
+
+bool verificareParanteze(caracter *cap){
+    caracter *s;
+    s = cap;
+    caracter *paranteze = new caracter;
+    while (s != NULL) {
+        if (s->car == '(' || s->car == '[' || s->car == '{') {
+            paranteze = adaugareInStivaCaractere(paranteze, s->car);
+        } else if (s->car == ')' || s->car == ']' || s->car == '}') {
+            if (paranteze == NULL) {
+                return false;
+            }
+            if (s->car == ')' && paranteze->car != '(') {
+                return false;
+            }
+            if (s->car == ']' && paranteze->car != '[') {
+                return false;
+            }
+            if (s->car == '}' && paranteze->car != '{') {
+                return false;
+            }
+            paranteze = stergereDinStivaCaractere(paranteze);
+        }
+        s = s->urm;
+    }
+}
+
 // ########################  CAOPITOLUL 4: Grafuri  ########################
 
 
@@ -1518,7 +1602,19 @@ int main() // PROGRAM PRINCIPAL
 
                         case 8: //
                             {
+                            caracter *stiva;
+                            // creare stiva
+                            stiva = creareStivaCaractere();
+                            cout << "Stiva dupa creare este: ";
+                            parcurgereStivaCaractere(stiva);
+                            cout << endl;
 
+                            //verificare paranteze
+                            cout<<"Verificare paranteze: ";
+                            if(verificareParanteze(stiva))
+                                cout<<"Expresia este corecta!"<<endl;
+                            else
+                                cout<<"Expresia nu este corecta!"<<endl;
                         }
                         break;
 
