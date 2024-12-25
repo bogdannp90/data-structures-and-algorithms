@@ -1,38 +1,54 @@
 #include <iostream>
-#include "include/probleme_diverse.h"
-#include "include/algoritmi_sortare.h"
-#include "include/liste_dinamice.h"
-#include "include/grafuri.h"
+#include <limits>
+
+#include "include/variousProblems.h"
+#include "include/sortingAlgorithms.h"
+#include "include/dynamicLists.h"
+#include "include/graphs.h"
 
 using namespace std;
 
+// Enum for main menu options
+enum MainMenuOptions {
+    EXIT = 0,
+    VARIOUS_PROBLEMS,
+    SORTING_ALGORITHMS,
+    DYNAMIC_LISTS
+};
+
 // Function prototypes
 void displayMainMenu();
+void handleInvalidInput();
+void handleInvalidOption();
 
 int main() {
-    int op; //Choice for main menu
+    int op; // Choice for main menu
 
     do {
         displayMainMenu();
-        cin >> op;
+        if (!(cin >> op)) {
+            handleInvalidInput();
+            continue;
+        }
 
         switch (op) {
-            case 1:
-                handleProblemeDiverse();
+            case VARIOUS_PROBLEMS:
+                handleVariousProblems();
                 break;
-            case 2:
-                handleAlgoritmiSortare();
+            case SORTING_ALGORITHMS:
+                handleSortingAlgorithms();
                 break;
-            case 3:
-                handleListeDinamice();
+            case DYNAMIC_LISTS:
+                handleDynamicLists();
                 break;
-            case 0:
+            case EXIT:
                 cout << "Goodbye!" << endl;
                 break;
             default:
-                cout << "Invalid option!" << endl;
+                handleInvalidOption();
+                break;
         }
-    } while (op != 0);
+    } while (op != EXIT);
 
     return 0;
 }
@@ -45,4 +61,16 @@ void displayMainMenu() {
     cout << "3. Dynamic lists" << endl;
     cout << "0. Exit program." << endl;
     cout << "Option: ";
+}
+
+// Function to handle invalid input
+void handleInvalidInput() {
+    cin.clear(); // Clear the error flag
+    cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Discard invalid input
+    cout << "Invalid input! Please enter a number." << endl;
+}
+
+// Function to handle invalid menu option
+void handleInvalidOption() {
+    cout << "Invalid option!" << endl;
 }
