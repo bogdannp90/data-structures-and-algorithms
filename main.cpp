@@ -55,7 +55,7 @@ int main() {
 
 // Function to display the main menu
 void displayMainMenu() {
-    cout << endl << "ASD PROGRAMS" << endl;
+    cout << endl << "DATA STRUCTURES AND ALGORITHMS PROGRAMS" << endl;
     cout << "1. Various problems" << endl;
     cout << "2. Sorting algorithms" << endl;
     cout << "3. Dynamic lists" << endl;
