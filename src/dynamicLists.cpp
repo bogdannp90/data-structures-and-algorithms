@@ -1,5 +1,5 @@
 #include "dynamicLists.h"
-
+#include "inputValidation.h"
 #include <iostream>
 #include <string>
 
@@ -8,9 +8,12 @@ using namespace std;
 // Function to create a simple list
 number* createSimpleList() {
     number *head = nullptr;
-    int value;
-    cout << "Enter values for the list (enter -1 to end): ";
-    while (cin >> value && value != -1) {
+    int value = 0, count = 0;
+    cout << "Enter the number of elements in the list: ";
+    count = handleUserInputNumber(count);
+    cout << "Enter values for the list: ";
+    for (int i = 0; i < count; i++) {
+        value = handleUserInputNumber(value);
         head = addToSimpleList(head, value);
     }
     return head;
@@ -59,9 +62,12 @@ number* modifyInSimpleList(number *head, int oldValue, int newValue) {
 // Function to create an ordered list
 number* createOrderedList() {
     number *head = nullptr;
-    int value;
-    cout << "Enter values for the ordered list (enter -1 to end): ";
-    while (cin >> value && value != -1) {
+    int value = 0, count =0;
+    cout << "Enter the number of elements in the ordered list: ";
+    count = handleUserInputNumber(count);
+    cout << "Enter values for the ordered list: ";
+    for (int i = 0; i < count; i++) {
+        value = handleUserInputNumber(value);
         head = addToOrderedList(head, value);
     }
     return head;
@@ -127,9 +133,12 @@ list2* createDoubleList() {
     list2 *list = new list2;
     list->first = nullptr;
     list->last = nullptr;
-    int value;
-    cout << "Enter values for the doubly linked list (enter -1 to end): ";
-    while (cin >> value && value != -1) {
+    int value = 0, count = 0;
+    cout << "Enter the number of elements in the doubly linked list: ";
+    count = handleUserInputNumber(count);
+    cout << "Enter values for the doubly linked list: ";
+    for (int i = 0; i < count; i++) {
+        value = handleUserInputNumber(value);
         list = addToDoubleList(list, value);
     }
     return list;
@@ -264,20 +273,37 @@ void traverseQueue(const list2 *list) {
     traverseDoubleListForward(list);
 }
 
+//Funtion to print the polynomial
+void printPolynomial(monomial *poly) {
+    monomial *current = poly;
+    while (current != nullptr) {
+        cout << current->coefficient << "x^" << current->degree << " ";
+        current = current->next;
+    }
+    cout << endl;
+}
+
 // Function to create a polynomial
 monomial* createPolynomial() {
     monomial *head = nullptr;
     int degree;
-    float coefficient;
-    cout << "Enter monomials (degree coefficient, enter -1 to end): ";
-    while (cin >> degree && degree != -1) {
-        cin >> coefficient;
+    float coefficient = 0;
+    int count = 0;
+    cout << "Enter the number of monomials in the polynomial: ";
+    count = handleUserInputNumber(count);
+    cout << "Enter monomials (coefficient and then degree): ";
+    for (int i = 0; i < count; i++) {
+        coefficient = handleUserInputForArrayElement(coefficient);
+        degree = handleUserInputNumber(degree);
+
         monomial *newNode = new monomial;
         newNode->degree = degree;
         newNode->coefficient = coefficient;
         newNode->next = head;
         head = newNode;
+        cout << "The polynomial is: ";
     }
+    printPolynomial(head);
     return head;
 }
 
@@ -425,38 +451,42 @@ enum DynamicListsOptions {
     PARENTHESES_VERIFICATION
 };
 
-void handleDynamicLists() {
-    int option;
-    do {
-        cout << endl << "Dynamic Lists" << endl;
-        cout << "1. Singly Linked Lists" << endl;
-        cout << "2. Ordered Singly Linked List from Input" << endl;
-        cout << "3. Doubly Linked Lists" << endl;
-        cout << "4. Stacks" << endl;
-        cout << "5. Queues" << endl;
-        cout << "6. Addition and Multiplication of Two Polynomials" << endl;
-        cout << "7. Merging Two Ordered Lists" << endl;
-        cout << "8. Parentheses Verification in an Arithmetic Expression" << endl;
-        cout << "0. Exit Dynamic Lists!" << endl;
+//Function to display the dynamic lists menu
+void displayDynamicListsMenu() {
+    cout << endl << "Dynamic Lists" << endl;
+    cout << "1. Singly Linked Lists" << endl;
+    cout << "2. Ordered Singly Linked List from Input" << endl;
+    cout << "3. Doubly Linked Lists" << endl;
+    cout << "4. Stacks" << endl;
+    cout << "5. Queues" << endl;
+    cout << "6. Addition and Multiplication of Two Polynomials" << endl;
+    cout << "7. Merging Two Ordered Lists" << endl;
+    cout << "8. Parentheses Verification in an Arithmetic Expression" << endl;
+    cout << "0. Exit Dynamic Lists!" << endl;
+    cout << "Dynamic Lists Option: ";
+}
 
-        cout << "Dynamic Lists Option: ";
-        cin >> option;
+void handleDynamicLists() {
+    int choice = 0;
+    do {
+        displayDynamicListsMenu();
+        choice = handleUserChoice(choice);
         cout << endl;
 
-        switch (option) {
+        switch (choice) {
             case SINGLY_LINKED_LISTS: {
                 number *list = createSimpleList();
                 cout << "List after creation: ";
                 traverseSimpleList(list);
                 cout << endl;
 
-                int subOption;
+                int subOption = 0;
                 cout << "Do you want to add elements to the list? [0/1] ";
-                cin >> subOption;
+                subOption = handleUserChoice(subOption);
                 if (subOption == 1) {
-                    int value;
+                    int value = 0;
                     cout << "Enter value to add: ";
-                    cin >> value;
+                    value = handleUserInputNumber(value);
                     list = addToSimpleList(list, value);
                     cout << "List after addition: ";
                     traverseSimpleList(list);
@@ -464,7 +494,7 @@ void handleDynamicLists() {
                 cout << endl;
 
                 cout << "Do you want to delete elements from the list? [0/1] ";
-                cin >> subOption;
+                subOption = handleUserChoice(subOption);
                 if (subOption == 1) {
                     list = deleteFromSimpleList(list);
                     cout << "List after deletion: ";
@@ -473,13 +503,13 @@ void handleDynamicLists() {
                 cout << endl;
 
                 cout << "Do you want to modify elements in the list? [0/1] ";
-                cin >> subOption;
+                subOption = handleUserChoice(subOption);
                 if (subOption == 1) {
-                    int oldValue, newValue;
+                    int oldValue = 0, newValue = 0;
                     cout << "Enter the element you want to modify: ";
-                    cin >> oldValue;
+                    oldValue = handleUserInputNumber(oldValue);
                     cout << "Enter the new value: ";
-                    cin >> newValue;
+                    newValue = handleUserInputNumber(newValue);
                     list = modifyInSimpleList(list, oldValue, newValue);
                     cout << "List after modification: ";
                     traverseSimpleList(list);
@@ -499,13 +529,13 @@ void handleDynamicLists() {
                 traverseSimpleList(list);
                 cout << endl;
 
-                int subOption;
+                int subOption = 0;
                 cout << "Do you want to add elements to the ordered list? [0/1] ";
-                cin >> subOption;
+                subOption = handleUserChoice(subOption);
                 if (subOption == 1) {
-                    int value;
+                    int value = 0;
                     cout << "Enter value to add to the list: ";
-                    cin >> value;
+                    value = handleUserInputNumber(value);
                     list = addToOrderedList(list, value);
                     cout << "List after addition: ";
                     traverseSimpleList(list);
@@ -513,7 +543,7 @@ void handleDynamicLists() {
                 cout << endl;
 
                 cout << "Do you want to delete elements from the list? [0/1] ";
-                cin >> subOption;
+                subOption = handleUserChoice(subOption);
                 if (subOption == 1) {
                     list = deleteFromSimpleList(list);
                     cout << "List after deletion: ";
@@ -537,13 +567,13 @@ void handleDynamicLists() {
                 traverseDoubleListBackward(list);
                 cout << endl;
 
-                int subOption;
+                int subOption = 0;
                 cout << "Do you want to add elements to the list? [0/1] ";
-                cin >> subOption;
+                subOption = handleUserChoice(subOption);
                 if (subOption == 1) {
                     int value;
                     cout << "Enter value to add: ";
-                    cin >> value;
+                    value = handleUserInputNumber(value);
                     list = addToDoubleList(list, value);
                     cout << "List after addition: ";
                     traverseDoubleListForward(list);
@@ -551,7 +581,7 @@ void handleDynamicLists() {
                 cout << endl;
 
                 cout << "Do you want to delete elements from the list? [0/1] ";
-                cin >> subOption;
+                subOption = handleUserChoice(subOption);
                 if (subOption == 1) {
                     list = deleteFromDoubleList(list);
                     cout << "List after deletion: ";
@@ -560,13 +590,13 @@ void handleDynamicLists() {
                 cout << endl;
 
                 cout << "Do you want to modify elements in the list? [0/1] ";
-                cin >> subOption;
+                subOption = handleUserChoice(subOption);
                 if (subOption == 1) {
-                    int oldValue, newValue;
+                    int oldValue = 0, newValue = 0;
                     cout << "Enter the element you want to modify: ";
-                    cin >> oldValue;
+                    oldValue = handleUserInputNumber(oldValue);
                     cout << "Enter the new value: ";
-                    cin >> newValue;
+                    newValue = handleUserInputNumber(newValue);
                     list = modifyInDoubleList(list, oldValue, newValue);
                     cout << "List after modification: ";
                     traverseDoubleListForward(list);
@@ -587,13 +617,13 @@ void handleDynamicLists() {
                 traverseStack(stack);
                 cout << endl;
 
-                int subOption;
+                int subOption = 0;
                 cout << "Do you want to add elements to the stack? [0/1] ";
-                cin >> subOption;
+                subOption = handleUserChoice(subOption);
                 if (subOption == 1) {
-                    int value;
+                    int value = 0;
                     cout << "Enter value to add: ";
-                    cin >> value;
+                    value = handleUserInputNumber(value);
                     stack = addToStack(stack, value);
                     cout << "Stack after addition: ";
                     traverseStack(stack);
@@ -601,11 +631,11 @@ void handleDynamicLists() {
                 cout << endl;
 
                 cout << "Do you want to delete elements from the stack? [0/1] ";
-                cin >> subOption;
+                subOption = handleUserChoice(subOption);
                 if (subOption == 1) {
-                    int count;
+                    int count = 0;
                     cout << "How many elements do you want to delete from the stack? ";
-                    cin >> count;
+                    count = handleUserInputNumber(count);
                     for (int i = 0; i < count; i++) {
                         stack = deleteFromStack(stack);
                     }
@@ -627,13 +657,13 @@ void handleDynamicLists() {
                 traverseQueue(queue);
                 cout << endl;
 
-                int subOption;
+                int subOption = 0;
                 cout << "Do you want to add elements to the queue? [0/1] ";
-                cin >> subOption;
+                subOption = handleUserChoice(subOption);
                 if (subOption == 1) {
-                    int value;
+                    int value = 0;
                     cout << "Enter value to add: ";
-                    cin >> value;
+                    value = handleUserInputNumber(value);
                     queue = addToQueue(queue, value);
                     cout << "Queue after addition: ";
                     traverseQueue(queue);
@@ -641,11 +671,11 @@ void handleDynamicLists() {
                 cout << endl;
 
                 cout << "Do you want to delete elements from the queue? [0/1] ";
-                cin >> subOption;
+                subOption = handleUserChoice(subOption);
                 if (subOption == 1) {
-                    int count;
+                    int count = 0;
                     cout << "How many elements do you want to delete from the queue? ";
-                    cin >> count;
+                    count = handleUserInputNumber(count);
                     for (int i = 0; i < count; i++) {
                         queue = deleteFromQueue(queue);
                     }
@@ -739,5 +769,5 @@ void handleDynamicLists() {
                 cout << "Invalid option! Please enter a number from 0 to 8!" << endl;
                 break;
         }
-    } while (option != 0);
+    } while (choice != EXIT_DYNAMIC_LISTS);
 }

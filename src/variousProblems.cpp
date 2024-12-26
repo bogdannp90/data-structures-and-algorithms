@@ -2,6 +2,7 @@
 #include "variousProblems.h"
 #include <iostream>
 #include <cmath>
+#include "inputValidation.h"
 
 using namespace std;
 
@@ -67,38 +68,46 @@ enum VariousProblemsOptions {
     BASE_CONVERSION
 };
 
+//Function to display the various problems menu
+void displayVariousProblemsMenu() {
+    cout << endl << "VARIOUS PROBLEMS" << endl;
+    cout << "1.1. Solving quadratic equation" << endl;
+    cout << "1.2. Matrix multiplication" << endl;
+    cout << "1.3. Prime number check" << endl;
+    cout << "1.4. Base conversion of a natural number" << endl;
+    cout << "1.0. Exit various problems!" << endl;
+    cout << "Option for various problems: ";
+}
+
 // Function to handle "Various Problems"
 void handleVariousProblems() {
-    int op; // Choice for "Various Problems"
+    int choice = -1; // Choice for "Various Problems"
     do {
-        // Display the menu
-        cout << endl << "Various Problems" << endl;
-        cout << "1.1. Solving quadratic equation" << endl;
-        cout << "1.2. Matrix multiplication" << endl;
-        cout << "1.3. Prime number check" << endl;
-        cout << "1.4. Base conversion of a natural number" << endl;
-        cout << "1.0. Exit various problems!" << endl;
-        cout << "Option for various problems: ";
-        cin >> op;
+        displayVariousProblemsMenu();
+        choice = handleUserChoice(choice);
         cout << endl;
 
-        switch (op) {
+        switch (choice) {
             case QUADRATIC_EQUATION: {
                 // Solve quadratic equation
-                float a, b, c;
+                float a = 0, b = 0, c = 0;
                 cout << "Enter the coefficients of the quadratic equation: ";
-                cin >> a >> b >> c;
+                a = handleUserInputForQuadraticEquation(a);
+                b = handleUserInputForQuadraticEquation(b);
+                c = handleUserInputForQuadraticEquation(c);
                 cout << endl << "The solution of the equation is: " << endl;
                 quadraticEquation(a, b, c);
                 break;
             }
             case MATRIX_MULTIPLICATION: {
                 // Matrix multiplication
-                int n, m, p, q;
+                int n = 0, m = 0, p = 0, q = 0;
                 cout << "Enter the dimensions of matrix A: ";
-                cin >> n >> m;
+                n = handleUserInputForMatrixDimension(n);
+                m = handleUserInputForMatrixDimension(m);
                 cout << "Enter the dimensions of matrix B: ";
-                cin >> q >> p;
+                p = handleUserInputForMatrixDimension(p);
+                q = handleUserInputForMatrixDimension(q);
                 cout << endl;
 
                 if (m == q) {
@@ -122,9 +131,9 @@ void handleVariousProblems() {
             }
             case PRIME_NUMBER_CHECK: {
                 // Prime number check
-                int n;
+                int n = 0;
                 cout << "Enter the number you want to check: ";
-                cin >> n;
+                n = handleUserInputNumber(n);
                 cout << endl;
 
                 if (isPrime(n))
@@ -136,13 +145,13 @@ void handleVariousProblems() {
             }
             case BASE_CONVERSION: {
                 // Base conversion
-                int n, b;
+                int n = 0, b = 0;
                 cout << "Enter the number: ";
-                cin >> n;
+                n = handleUserInputNumber(n);
                 cout << endl;
 
                 cout << "In which base do you want to convert the number? ";
-                cin >> b;
+                b = handleUserInputNumber(b);
                 cout << endl;
 
                 cout << "The number in base " << b << " is: ";
@@ -158,5 +167,5 @@ void handleVariousProblems() {
                 // Invalid option
                 cout << "Invalid option! Please enter a number from 0 to 4!" << endl;
         }
-    } while (op != 0);
+    } while (choice != EXIT);
 }

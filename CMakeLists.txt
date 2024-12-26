@@ -13,4 +13,6 @@ add_executable(laborator main.cpp
         src/dynamicLists.cpp
         include/dynamicLists.h
         src/graphs.cpp
-        include/graphs.h)
+        include/graphs.h
+        src/inputValidation.cpp
+        include/inputValidation.h)

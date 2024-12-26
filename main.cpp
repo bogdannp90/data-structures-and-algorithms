@@ -1,6 +1,6 @@
 #include <iostream>
-#include <limits>
 
+#include "include/inputValidation.h"
 #include "include/variousProblems.h"
 #include "include/sortingAlgorithms.h"
 #include "include/dynamicLists.h"
@@ -18,17 +18,15 @@ enum MainMenuOptions {
 
 // Function prototypes
 void displayMainMenu();
-void handleInvalidInput();
-void handleInvalidOption();
 
 int main() {
-    int op; // Choice for main menu
+    int choice = -1; // Choice for main menu
 
     do {
         displayMainMenu();
-        cin>>op;
+        choice = handleUserChoice(choice);
 
-        switch (op) {
+        switch (choice) {
             case VARIOUS_PROBLEMS:
                 handleVariousProblems();
                 break;
@@ -45,7 +43,7 @@ int main() {
                 cout << "Invalid option! Please enter a number from 0 to 3!" << endl;
                 break;
         }
-    } while (op != EXIT);
+    } while (choice != EXIT);
 
     return 0;
 }

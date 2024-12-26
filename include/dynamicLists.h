@@ -70,6 +70,7 @@ monomial *createPolynomial();
 void addPolynomials(monomial *poly1, monomial *poly2);
 void multiplyPolynomials(monomial *poly1, monomial *poly2);
 void sortPolynomial(monomial *poly);
+void printPolynomial(monomial *poly);
 
 // Function declarations for parentheses verification
 bool checkParentheses(const std::string &expression);

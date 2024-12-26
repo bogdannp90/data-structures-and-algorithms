@@ -2,6 +2,7 @@
 #include <iostream>
 #include <algorithm>
 #include <vector>
+#include "inputValidation.h"
 
 using namespace std;
 
@@ -238,89 +239,93 @@ void printArray(const vector<float>& arr) {
     cout << endl << endl;
 }
 
+//Function to display the sorting algorithms menu
+void displaySortingAlgorithmsMenu() {
+    cout << "Sorting Algorithms" << endl;
+    cout << "1. Bubble Sort" << endl;
+    cout << "2. Counting Sort" << endl;
+    cout << "3. Selection Sort" << endl;
+    cout << "4. Quicksort" << endl;
+    cout << "5. Merge Sort" << endl;
+    cout << "6. Insertion Sort" << endl;
+    cout << "7. Shell Sort" << endl;
+    cout << "8. Radix Sort" << endl;
+    cout << "9. Sequential Search in an array" << endl;
+    cout << "10. Binary Search in an array" << endl;
+    cout << "0. Exit sorting algorithms!" << endl;
+}
+
 // Function to handle sorting algorithms menu
 void handleSortingAlgorithms() {
-    int op;
-    int n;
+    int choice = 0;
+    int lenght = 0;
     vector<float> arr, sortedArr;
     cout << "Enter the number of elements in the array: ";
-    cin >> n;
-    arr.resize(n);
+    lenght = handleUserInputForArraySize(lenght);
+    arr.resize(lenght);
     cout << endl << "Enter the elements of the array: ";
-    for (int i = 0; i < n; i++) {
-        cin >> arr[i];
+    for (int i = 0; i < lenght; i++) {
+        arr[i] = handleUserInputForArrayElement(arr[i]);
     }
     cout << endl;
 
     do {
-        cout << "Sorting Algorithms" << endl;
-        cout << "1. Bubble Sort" << endl;
-        cout << "2. Counting Sort" << endl;
-        cout << "3. Selection Sort" << endl;
-        cout << "4. Quicksort" << endl;
-        cout << "5. Merge Sort" << endl;
-        cout << "6. Insertion Sort" << endl;
-        cout << "7. Shell Sort" << endl;
-        cout << "8. Radix Sort" << endl;
-        cout << "9. Sequential Search in an array" << endl;
-        cout << "10. Binary Search in an array" << endl;
-        cout << "0. Exit sorting algorithms!" << endl;
-        cout << "Option for sorting algorithms: ";
-        cin >> op;
+        displaySortingAlgorithmsMenu();
+        choice = handleUserChoice(choice);
         cout << endl;
 
         sortedArr = arr;
 
-        switch (op) {
+        switch (choice) {
             case BUBBLE_SORT:
-                bubbleSort(n, sortedArr.data());
+                bubbleSort(lenght, sortedArr.data());
                 cout << "The array sorted with Bubble Sort is: ";
                 printArray(sortedArr);
                 break;
 
             case COUNTING_SORT:
-                countingSort(n, sortedArr.data());
+                countingSort(lenght, sortedArr.data());
                 cout << "The array sorted with Counting Sort is: ";
                 printArray(sortedArr);
                 break;
 
             case SELECTION_SORT:
-                selectionSort(n, sortedArr.data());
+                selectionSort(lenght, sortedArr.data());
                 cout << "The array sorted with Selection Sort is: ";
                 printArray(sortedArr);
                 break;
 
             case QUICK_SORT:
-                quickSort(0, n - 1, sortedArr.data());
+                quickSort(0, lenght - 1, sortedArr.data());
                 cout << "The array sorted with Quick Sort is: ";
                 printArray(sortedArr);
                 break;
 
             case MERGE_SORT:
-                mergeSort(0, n - 1, sortedArr.data());
+                mergeSort(0, lenght - 1, sortedArr.data());
                 cout << "The array sorted with Merge Sort is: ";
                 printArray(sortedArr);
                 break;
 
             case INSERTION_SORT:
-                insertionSort(n, sortedArr.data());
+                insertionSort(lenght, sortedArr.data());
                 cout << "The array sorted with Insertion Sort is: ";
                 printArray(sortedArr);
                 break;
 
             case SHELL_SORT:
-                shellSort(n, sortedArr.data());
+                shellSort(lenght, sortedArr.data());
                 cout << "The array sorted with Shell Sort is: ";
                 printArray(sortedArr);
                 break;
 
             case RADIX_SORT: {
                 // Convert the array to an array of integers because the algoritm implemented works only with integers
-                vector<int> sortedArrInt(n);
-                for (int i = 0; i < n; i++) {
+                vector<int> sortedArrInt(lenght);
+                for (int i = 0; i < lenght; i++) {
                     sortedArrInt[i] = static_cast<int>(sortedArr[i]);
                 }
-                radixSort(n, sortedArrInt.data());
+                radixSort(lenght, sortedArrInt.data());
                 cout << "The array sorted with Radix Sort is: ";
                 for (int num : sortedArrInt) {
                     cout << num << " ";
@@ -331,20 +336,20 @@ void handleSortingAlgorithms() {
 
             case SEQUENTIAL_SEARCH: {
                 cout << "Enter the element you are looking for: ";
-                float key;
-                cin >> key;
-                sequentialSearch(n, sortedArr.data(), key);
+                float key = 0;
+                key = handleUserInputForArrayElement(key);
+                sequentialSearch(lenght, sortedArr.data(), key);
                 break;
             }
 
             case BINARY_SEARCH:
-                quickSort(0, n - 1, sortedArr.data());
+                quickSort(0, lenght - 1, sortedArr.data());
                 cout << "The sorted array is: ";
                 printArray(sortedArr);
                 cout << "Enter the element you are looking for: ";
                 float key;
-                cin >> key;
-                binarySearch(0, n - 1, sortedArr.data(), key);
+                key = handleUserInputForArrayElement(key);
+                binarySearch(0, lenght - 1, sortedArr.data(), key);
                 break;
 
             case EXIT:
@@ -355,5 +360,5 @@ void handleSortingAlgorithms() {
                 cout << "Invalid option! Please enter a value from 0 to 10!" << endl;
                 break;
         }
-    } while (op != EXIT);
+    } while (choice != EXIT);
 }
