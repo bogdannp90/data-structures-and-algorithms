@@ -11,7 +11,6 @@ Please note that this project is not complete, and I would appreciate any sugges
 - [Installation](#installation)
 - [Usage](#usage)
 - [File Structure](#file-structure)
-- [License](#license)
 - [Contact](#contact)
 
 ## Features
@@ -51,9 +50,6 @@ Please note that this project is not complete, and I would appreciate any sugges
   - `variousProblems.cpp`: Implementations of various problem-solving functions.
   - `graphs.cpp`: Placeholder for graph algorithm implementations.
 - `main.cpp`: Entry point of the program, handles the main menu and user interactions.
-
-## License
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
 ## Contact
 For any questions or suggestions, please contact:
