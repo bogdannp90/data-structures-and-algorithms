@@ -10,7 +10,7 @@ This project is a comprehensive implementation of various data structures and al
 - [Installation](#installation)
 - [Usage](#usage)
 - [Contributing](#contributing)
-- [File Structure](#structure)
+- [File Structure](#file-structure)
 - [License](#license)
 - [Contact](#contact)
 
