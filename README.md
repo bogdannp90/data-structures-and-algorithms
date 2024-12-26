@@ -9,7 +9,6 @@ This project is a comprehensive implementation of various data structures and al
 - [Features](#features)
 - [Installation](#installation)
 - [Usage](#usage)
-- [Contributing](#contributing)
 - [File Structure](#file-structure)
 - [License](#license)
 - [Contact](#contact)
@@ -54,14 +53,6 @@ This project contains various implementations of data structures and algorithms 
   - `variousProblems.cpp`: Implementations of various problem-solving functions.
   - `graphs.cpp`: Placeholder for graph algorithm implementations.
 - `main.cpp`: Entry point of the program, handles the main menu and user interactions.
-
-## Contributing
-Contributions are welcome! Please follow these steps:
-1. Fork the repository.
-2. Create a new branch (`git checkout -b feature-branch`).
-3. Commit your changes (`git commit -m 'Add some feature'`).
-4. Push to the branch (`git push origin feature-branch`).
-5. Open a pull request.
 
 ## License
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
