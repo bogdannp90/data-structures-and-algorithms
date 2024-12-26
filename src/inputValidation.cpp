@@ -32,7 +32,7 @@ int handleUserInputForArraySize(int number) {
 }
 
 // Function to handle input for the elements of the array
-float handleUserInputForArrayElement(float element) {
+float handleUserInputFloat(float element) {
     while ( !(cin>>element)) {
         cout << "Invalid input! Please enter a number: ";
         cin.clear();
@@ -62,7 +62,7 @@ int handleUserInputForMatrixDimension(int dimension) {
 }
 
 // Function to handle input for a number
-int handleUserInputNumber(int number) {
+int handleUserInputInteger(int number) {
     while ( !(cin>>number)) {
         handleInvalidInput();
         cin.clear();

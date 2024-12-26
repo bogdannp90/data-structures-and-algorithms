@@ -81,7 +81,7 @@ void displayVariousProblemsMenu() {
 
 // Function to handle "Various Problems"
 void handleVariousProblems() {
-    int choice = -1; // Choice for "Various Problems"
+    int choice = 0; // Choice for "Various Problems"
     do {
         displayVariousProblemsMenu();
         choice = handleUserChoice(choice);
@@ -115,13 +115,13 @@ void handleVariousProblems() {
                     cout << "Enter the elements of matrix A: ";
                     for (int i = 0; i < n; i++)
                         for (int j = 0; j < m; j++)
-                            cin >> A[i][j];
+                            A[i][j] = handleUserInputFloat(A[i][j]);
                     cout << endl;
 
                     cout << "Enter the elements of matrix B: ";
                     for (int i = 0; i < n; i++)
                         for (int j = 0; j < m; j++)
-                            cin >> B[i][j];
+                            B[i][j] = handleUserInputFloat(B[i][j]);
                     cout << endl;
                     cout << "The result of matrix multiplication is:" << endl;
                     matrixMultiplication(n, m, p, A, B);
@@ -133,7 +133,7 @@ void handleVariousProblems() {
                 // Prime number check
                 int n = 0;
                 cout << "Enter the number you want to check: ";
-                n = handleUserInputNumber(n);
+                n = handleUserInputInteger(n);
                 cout << endl;
 
                 if (isPrime(n))
@@ -147,11 +147,11 @@ void handleVariousProblems() {
                 // Base conversion
                 int n = 0, b = 0;
                 cout << "Enter the number: ";
-                n = handleUserInputNumber(n);
+                n = handleUserInputInteger(n);
                 cout << endl;
 
                 cout << "In which base do you want to convert the number? ";
-                b = handleUserInputNumber(b);
+                b = handleUserInputInteger(b);
                 cout << endl;
 
                 cout << "The number in base " << b << " is: ";

@@ -265,7 +265,7 @@ void handleSortingAlgorithms() {
     arr.resize(lenght);
     cout << endl << "Enter the elements of the array: ";
     for (int i = 0; i < lenght; i++) {
-        arr[i] = handleUserInputForArrayElement(arr[i]);
+        arr[i] = handleUserInputFloat(arr[i]);
     }
     cout << endl;
 
@@ -336,8 +336,8 @@ void handleSortingAlgorithms() {
 
             case SEQUENTIAL_SEARCH: {
                 cout << "Enter the element you are looking for: ";
-                float key = 0;
-                key = handleUserInputForArrayElement(key);
+                float key;
+                key = handleUserInputFloat(key);
                 sequentialSearch(lenght, sortedArr.data(), key);
                 break;
             }
@@ -347,8 +347,8 @@ void handleSortingAlgorithms() {
                 cout << "The sorted array is: ";
                 printArray(sortedArr);
                 cout << "Enter the element you are looking for: ";
-                float key;
-                key = handleUserInputForArrayElement(key);
+                float key = 0;
+                key = handleUserInputFloat(key);
                 binarySearch(0, lenght - 1, sortedArr.data(), key);
                 break;
 

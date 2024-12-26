@@ -5,9 +5,9 @@
 void handleInvalidInput();
 int handleUserChoice(int choice);
 int handleUserInputForArraySize(int number);
-float handleUserInputForArrayElement(float element);
+float handleUserInputFloat(float element);
 float handleUserInputForQuadraticEquation(float element);
 int handleUserInputForMatrixDimension(int dimension);
-int handleUserInputNumber(int number);
+int handleUserInputInteger(int number);
 
 #endif //INPUTVALIDATION_H

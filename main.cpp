@@ -20,7 +20,7 @@ enum MainMenuOptions {
 void displayMainMenu();
 
 int main() {
-    int choice = -1; // Choice for main menu
+    int choice = 0; // Choice for main menu
 
     do {
         displayMainMenu();
