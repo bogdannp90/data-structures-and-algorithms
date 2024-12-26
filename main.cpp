@@ -10,13 +10,17 @@ using namespace std;
 
 // Enum for main menu options
 enum MainMenuOptions {
-    EXIT = 0,
-    VARIOUS_PROBLEMS,
-    SORTING_ALGORITHMS,
-    DYNAMIC_LISTS
+    EXIT = 0,            ///< Exit the program
+    VARIOUS_PROBLEMS,    ///< Option for various problems
+    SORTING_ALGORITHMS,  ///< Option for sorting algorithms
+    DYNAMIC_LISTS        ///< Option for dynamic lists
 };
 
 // Function prototypes
+
+/**
+ * @brief Displays the main menu.
+ */
 void displayMainMenu();
 
 int main() {
