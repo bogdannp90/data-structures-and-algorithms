@@ -2,19 +2,17 @@
 
 ## Overview
 
-This project is a comprehensive implementation of various data structures and algorithms in C++. It includes sorting algorithms, dynamic lists, graph algorithms, and solutions to various mathematical problems. The project is designed to help understand and practice fundamental concepts in data structures and algorithms.
+I created this project to learn and practice data structures and algorithms in C++. The project includes a comprehensive implementation of various data structures and algorithms, such as dynamic lists, sorting algorithms, graph algorithms, and solutions to various mathematical problems. Additionally, this project serves as a learning tool for using GitHub and creating a well-structured project.
+
+Please note that this project is not complete, and I would appreciate any suggestions for improvement.
 
 ## Table of Contents
-- [Introduction](#introduction)
 - [Features](#features)
 - [Installation](#installation)
 - [Usage](#usage)
 - [File Structure](#file-structure)
 - [License](#license)
 - [Contact](#contact)
-
-## Introduction
-This project contains various implementations of data structures and algorithms in C++. It includes sorting algorithms, dynamic lists, and solutions to various problems.
 
 ## Features
 - **Sorting Algorithms**: Implementations of Bubble Sort, Selection Sort, Counting Sort, Merge Sort, Quick Sort, Insertion Sort, Shell Sort, and Radix Sort.
