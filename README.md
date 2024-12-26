@@ -1,20 +1,46 @@
-```markdown
-# Data Structures and Algorithms Program
+# Data Structures and Algorithms Programs
 
 ## Overview
 
 This project is a comprehensive implementation of various data structures and algorithms in C++. It includes sorting algorithms, dynamic lists, graph algorithms, and solutions to various mathematical problems. The project is designed to help understand and practice fundamental concepts in data structures and algorithms.
 
-## Features
+## Table of Contents
+- [Introduction](#introduction)
+- [Features](#features)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Contributing](#contributing)
+- [File Structure](#structure)
+- [License](#license)
+- [Contact](#contact)
 
+## Introduction
+This project contains various implementations of data structures and algorithms in C++. It includes sorting algorithms, dynamic lists, and solutions to various problems.
+
+## Features
 - **Sorting Algorithms**: Implementations of Bubble Sort, Selection Sort, Counting Sort, Merge Sort, Quick Sort, Insertion Sort, Shell Sort, and Radix Sort.
-- **Dynamic Lists**: Operations on singly linked lists, doubly linked lists, stacks, and queues.
-- **Graph Algorithms**: Placeholder for future graph algorithm implementations.
-- **Various Problems**: Solutions to quadratic equations, matrix multiplication, prime number checks, and base conversions.
-- **Search Algorithms**: Sequential and binary search implementations.
+- **Dynamic Lists**: Operations on singly linked lists, doubly linked lists, stacks, and queues. These data structures allow for dynamic memory allocation and efficient insertion and deletion of elements.
+- **Graph Algorithms**: Placeholder for future graph algorithm implementations. Graph algorithms are used to solve problems related to graph theory, such as finding the shortest path or detecting cycles.
+- **Various Problems**: Solutions to quadratic equations, matrix multiplication, prime number checks, and base conversions. These problems cover a range of mathematical and computational challenges.
+- **Search Algorithms**: Sequential and binary search implementations. These algorithms are used to find specific elements within a data structure.
+
+## Installation
+1. Clone the repository:
+    ```sh
+    git clone https://github.com/bogdannp90/data-structures-and-algorithms.git
+    ```
+2. Navigate to the project directory:
+    ```sh
+    cd data-structures-and-algorithms
+    ```
+3. Open the project in CLion or your preferred IDE.
+
+## Usage
+1. Build the project using your IDE.
+2. Run the `main` function to access the main menu.
+3. Choose an option from the menu to execute the corresponding functionality.
 
 ## File Structure
-
 - `include/`
   - `sortingAlgorithms.h`: Prototypes for sorting algorithms.
   - `dynamicLists.h`: Prototypes for dynamic list operations.
@@ -29,61 +55,8 @@ This project is a comprehensive implementation of various data structures and al
   - `graphs.cpp`: Placeholder for graph algorithm implementations.
 - `main.cpp`: Entry point of the program, handles the main menu and user interactions.
 
-## Getting Started
-
-### Prerequisites
-
-- A C++ compiler (e.g., g++, clang++)
-- CMake (for building the project)
-- An IDE or text editor (e.g., CLion, Visual Studio Code)
-
-### Building the Project
-
-1. Clone the repository:
-   ```sh
-   git clone https://github.com/bogdannp90/data-structures-algorithms.git
-   cd data-structures-algorithms
-   ```
-
-2. Create a build directory and navigate into it:
-   ```sh
-   mkdir build
-   cd build
-   ```
-
-3. Run CMake to configure the project:
-   ```sh
-   cmake ..
-   ```
-
-4. Build the project:
-   ```sh
-   make
-   ```
-
-### Running the Program
-
-After building the project, you can run the executable:
-
-```sh
-./data_structures_algorithms
-```
-
-### Usage
-
-Upon running the program, you will be presented with a main menu with the following options:
-
-1. Various problems
-2. Sorting algorithms
-3. Dynamic lists
-0. Exit program
-
-Select an option by entering the corresponding number. Each submenu will guide you through the available operations and prompt for necessary inputs.
-
 ## Contributing
-
 Contributions are welcome! Please follow these steps:
-
 1. Fork the repository.
 2. Create a new branch (`git checkout -b feature-branch`).
 3. Commit your changes (`git commit -m 'Add some feature'`).
@@ -91,14 +64,9 @@ Contributions are welcome! Please follow these steps:
 5. Open a pull request.
 
 ## License
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
-This project is licensed under the MIT License. See the `LICENSE` file for details.
-
-## Acknowledgments
-
-- This project is inspired by the need to practice and understand fundamental data structures and algorithms.
-- Thanks to all contributors and the open-source community for their support.
-
-```
-
-This `README.md` file provides an overview of the project, instructions for building and running the program, and guidelines for contributing. It follows standard practices for GitHub README files.
+## Contact
+For any questions or suggestions, please contact:
+- Name: Bogdan Pirvu
+- Email: bogdan.pirvu90@gmail.com
