@@ -413,6 +413,18 @@ bool checkParentheses(const string &expression) {
     return stack == nullptr;
 }
 
+enum DynamicListsOptions {
+    EXIT_DYNAMIC_LISTS = 0,
+    SINGLY_LINKED_LISTS,
+    ORDERED_SINGLY_LINKED_LIST,
+    DOUBLY_LINKED_LISTS,
+    STACKS,
+    QUEUES,
+    POLYNOMIALS,
+    MERGE_ORDERED_LISTS,
+    PARENTHESES_VERIFICATION
+};
+
 void handleDynamicLists() {
     int option;
     do {
@@ -432,7 +444,7 @@ void handleDynamicLists() {
         cout << endl;
 
         switch (option) {
-            case 1: {
+            case SINGLY_LINKED_LISTS: {
                 number *list = createSimpleList();
                 cout << "List after creation: ";
                 traverseSimpleList(list);
@@ -481,7 +493,7 @@ void handleDynamicLists() {
             }
             break;
 
-            case 2: {
+            case ORDERED_SINGLY_LINKED_LIST: {
                 number *list = createOrderedList();
                 cout << "List after creation: ";
                 traverseSimpleList(list);
@@ -516,7 +528,7 @@ void handleDynamicLists() {
             }
             break;
 
-            case 3: {
+            case DOUBLY_LINKED_LISTS: {
                 list2 *list = createDoubleList();
                 cout << "List after creation, traversed forward: ";
                 traverseDoubleListForward(list);
@@ -569,7 +581,7 @@ void handleDynamicLists() {
             }
             break;
 
-            case 4: {
+            case STACKS: {
                 number *stack = createStack();
                 cout << "Stack after creation: ";
                 traverseStack(stack);
@@ -609,7 +621,7 @@ void handleDynamicLists() {
             }
             break;
 
-            case 5: {
+            case QUEUES: {
                 list2 *queue = createQueue();
                 cout << "Queue after creation: ";
                 traverseQueue(queue);
@@ -650,7 +662,7 @@ void handleDynamicLists() {
             }
             break;
 
-            case 6: {
+            case POLYNOMIALS: {
                 monomial *poly1 = createPolynomial();
                 monomial *poly2 = createPolynomial();
 
@@ -676,7 +688,7 @@ void handleDynamicLists() {
             }
             break;
 
-            case 7: {
+            case MERGE_ORDERED_LISTS: {
                 number *list1 = createOrderedList();
                 cout << "First list after creation: ";
                 traverseSimpleList(list1);
@@ -705,7 +717,7 @@ void handleDynamicLists() {
             }
             break;
 
-            case 8: {
+            case PARENTHESES_VERIFICATION: {
                 string expression;
                 cout << "Enter the expression: ";
                 cin >> expression;
@@ -719,12 +731,12 @@ void handleDynamicLists() {
             }
             break;
 
-            case 0:
+            case EXIT_DYNAMIC_LISTS:
                 cout << "Exiting Dynamic Lists menu." << endl;
                 break;
 
             default:
-                cout << "Invalid option!" << endl;
+                cout << "Invalid option! Please enter a number from 0 to 8!" << endl;
                 break;
         }
     } while (option != 0);

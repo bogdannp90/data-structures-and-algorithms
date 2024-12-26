@@ -156,10 +156,8 @@ void radixSort(int n, int arr[MAX_SIZE]) {
     for (int i = 0; i < n; i++)
         if (maxVal < arr[i]) maxVal = arr[i];
 
-    int maxDigits = countDigits(maxVal);
-
     // Perform counting sort for every digit
-    for (int exp = 1; maxVal / exp > 0; exp *= 10) {
+    for (int exp = 1; maxVal / exp > 0; exp *= 10) { // exp is 10^i where i is the current digit position
         int output[MAX_SIZE];
         int count[10] = {0};
 
@@ -187,7 +185,7 @@ void radixSort(int n, int arr[MAX_SIZE]) {
 }
 
 // Sequential search algorithm
-void sequentialSearch(int n, float arr[MAX_SIZE], float key) {
+void sequentialSearch(int n, float arr[MAX_SIZE], float key) { //key is the element we are looking for
     int occurrences = 0;
     for (int i = 0; i < n; i++) if (arr[i] == key) occurrences++;
     if (occurrences == 0) cout << "Element not found in the array!";
@@ -317,6 +315,7 @@ void handleSortingAlgorithms() {
                 break;
 
             case RADIX_SORT: {
+                // Convert the array to an array of integers because the algoritm implemented works only with integers
                 vector<int> sortedArrInt(n);
                 for (int i = 0; i < n; i++) {
                     sortedArrInt[i] = static_cast<int>(sortedArr[i]);
@@ -353,7 +352,7 @@ void handleSortingAlgorithms() {
                 break;
 
             default:
-                cout << "Invalid option!" << endl;
+                cout << "Invalid option! Please enter a value from 0 to 10!" << endl;
                 break;
         }
     } while (op != EXIT);

@@ -26,10 +26,7 @@ int main() {
 
     do {
         displayMainMenu();
-        if (!(cin >> op)) {
-            handleInvalidInput();
-            continue;
-        }
+        cin>>op;
 
         switch (op) {
             case VARIOUS_PROBLEMS:
@@ -45,7 +42,7 @@ int main() {
                 cout << "Goodbye!" << endl;
                 break;
             default:
-                handleInvalidOption();
+                cout << "Invalid option! Please enter a number from 0 to 3!" << endl;
                 break;
         }
     } while (op != EXIT);
@@ -59,18 +56,6 @@ void displayMainMenu() {
     cout << "1. Various problems" << endl;
     cout << "2. Sorting algorithms" << endl;
     cout << "3. Dynamic lists" << endl;
-    cout << "0. Exit program." << endl;
+    cout << "0. Exit program" << endl;
     cout << "Option: ";
-}
-
-// Function to handle invalid input
-void handleInvalidInput() {
-    cin.clear(); // Clear the error flag
-    cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Discard invalid input
-    cout << "Invalid input! Please enter a number." << endl;
-}
-
-// Function to handle invalid menu option
-void handleInvalidOption() {
-    cout << "Invalid option!" << endl;
 }
