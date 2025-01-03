@@ -78,7 +78,7 @@ void radixSort(int n, int arr[MAX_SIZE]);
  * @param arr Array to be searched.
  * @param key Key to be searched for.
  */
-void sequentialSearch(int n, float arr[MAX_SIZE], float key);
+void sequentialSearch(int n, const float arr[MAX_SIZE], float key);
 
 /**
  * @brief Performs a binary search on a sorted array.

@@ -186,7 +186,7 @@ void radixSort(int n, int arr[MAX_SIZE]) {
 }
 
 // Sequential search algorithm
-void sequentialSearch(int n, float arr[MAX_SIZE], float key) { //key is the element we are looking for
+void sequentialSearch(int n, const float arr[MAX_SIZE], float key) { //key is the element we are looking for
     int occurrences = 0;
     for (int i = 0; i < n; i++) if (arr[i] == key) occurrences++;
     if (occurrences == 0) cout << "Element not found in the array!";
@@ -347,7 +347,7 @@ void handleSortingAlgorithms() {
                 cout << "The sorted array is: ";
                 printArray(sortedArr);
                 cout << "Enter the element you are looking for: ";
-                float key = 0;
+                float key;
                 key = handleUserInputFloat(key);
                 binarySearch(0, lenght - 1, sortedArr.data(), key);
                 break;
