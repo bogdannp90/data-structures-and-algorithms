@@ -13,7 +13,8 @@ enum MainMenuOptions {
     EXIT = 0,            ///< Exit the program
     VARIOUS_PROBLEMS,    ///< Option for various problems
     SORTING_ALGORITHMS,  ///< Option for sorting algorithms
-    DYNAMIC_LISTS        ///< Option for dynamic lists
+    DYNAMIC_LISTS,      ///< Option for dynamic lists
+    GRAPH_PROBLEMS       ///< Option for graph problems
 };
 
 // Function prototypes
@@ -43,6 +44,9 @@ int main() {
             case EXIT:
                 cout << "Goodbye!" << endl;
                 break;
+            case GRAPH_PROBLEMS:
+                //handleGraphs();
+                break;
             default:
                 cout << "Invalid option! Please enter a number from 0 to 3!" << endl;
                 break;
@@ -58,6 +62,7 @@ void displayMainMenu() {
     cout << "1. Various problems" << endl;
     cout << "2. Sorting algorithms" << endl;
     cout << "3. Dynamic lists" << endl;
+    cout << "4. Graph problems" << endl;
     cout << "0. Exit program" << endl;
     cout << "Option: ";
 }
