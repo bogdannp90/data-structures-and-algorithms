@@ -22,6 +22,7 @@ vector<vector<int> > adjacencyMatrixToAdjacencyList(const vector<vector<int> > &
     return adjList;
 }
 
+// Function to convert an adjacency list to an adjacency matrix
 vector<vector<int> > nodeListToAdjacencyMatrix(const vector<vector<int> > &nodeList) {
     int n = nodeList.size();
     vector matrix(n, vector(n, 0));
@@ -33,6 +34,7 @@ vector<vector<int> > nodeListToAdjacencyMatrix(const vector<vector<int> > &nodeL
     return matrix;
 }
 
+// Function to convert an adjacency matrix to an edge list
 vector<edge> adjacencyMatrixToEdgeList(const vector<vector<int> > &adjMatrix) {
     vector<edge> edgeList;
 
@@ -50,6 +52,7 @@ vector<edge> adjacencyMatrixToEdgeList(const vector<vector<int> > &adjMatrix) {
     return edgeList;
 }
 
+// Function to convert an edge list to an adjacency matrix
 vector<vector<int> > edgeListToAdjacencyMatrix(const vector<edge> &edgeList, int n) {
     vector adjMatrix(n, vector<int>(n, 0)); // Initialize all elements as 0
 
@@ -62,6 +65,7 @@ vector<vector<int> > edgeListToAdjacencyMatrix(const vector<edge> &edgeList, int
     return adjMatrix;
 }
 
+// Function to convert a node list to an edge list
 vector<edge> nodeListToEdgeList(const vector<vector<int> > &nodeList) {
     vector<edge> edgeList;
     int n = nodeList.size();
@@ -77,6 +81,7 @@ vector<edge> nodeListToEdgeList(const vector<vector<int> > &nodeList) {
     return edgeList;
 }
 
+// Function to convert an edge list to a node list
 vector<vector<int> > edgeListToNodeList(const vector<edge> &edgeList) {
     int n = 0;
     for (const auto &e: edgeList) {
@@ -90,6 +95,7 @@ vector<vector<int> > edgeListToNodeList(const vector<edge> &edgeList) {
     return nodeList;
 }
 
+// Function to print an adjacency list
 void printAdjList(const vector<vector<int> > &AdjList) {
     int NODE_COUNT = AdjList.size();
     for (int i = 0; i < NODE_COUNT; ++i) {
@@ -101,6 +107,7 @@ void printAdjList(const vector<vector<int> > &AdjList) {
     }
 }
 
+// Function to print an adjacency matrix
 void printAdjMatrix(const vector<vector<int> > &AdjMatrix) {
     int NODE_COUNT = AdjMatrix.size();
     for (int i = 0; i < NODE_COUNT; ++i) {
@@ -111,12 +118,14 @@ void printAdjMatrix(const vector<vector<int> > &AdjMatrix) {
     }
 }
 
+// Function to print an edge list
 void printEdgeList(const vector<edge> &edgeList) {
     for (const auto &e: edgeList) {
         cout << "(" << e.node1 << ", " << e.node2 << ")" << endl;
     }
 }
 
+// Function to traverse a graph using Depth First Search (DFS)
 void dfsMain(const vector<vector<int> > &AdjList, int source) {
     int NODE_COUNT = AdjList.size();
     vector<bool> visited(NODE_COUNT, false);
@@ -125,6 +134,7 @@ void dfsMain(const vector<vector<int> > &AdjList, int source) {
     cout << endl;
 }
 
+// Function to traverse a graph using Depth First Search (DFS) recursively
 void dfsRecursive(const vector<vector<int> > &AdjList, int node, vector<bool> &visited) {
     cout << node << " ";
     visited[node] = true;
@@ -135,6 +145,7 @@ void dfsRecursive(const vector<vector<int> > &AdjList, int node, vector<bool> &v
     }
 }
 
+// Function to traverse a graph using Breadth First Search (BFS)
 void bfs(const vector<vector<int> > &AdjList, int source) {
     int NODE_COUNT = AdjList.size();
     vector<bool> visited(NODE_COUNT, false);
@@ -156,12 +167,14 @@ void bfs(const vector<vector<int> > &AdjList, int source) {
     cout << endl;
 }
 
+// Function to check the existence of a path between two nodes
 bool checkExistanceOfPath(const vector<vector<int> > &AdjList, int source, int destination) {
     int NODE_COUNT = AdjList.size();
     vector<bool> visited(NODE_COUNT, false);
     return pathSearch(AdjList, source, destination, visited);
 }
 
+// Function to search for a path between two nodes
 bool pathSearch(const vector<vector<int> > &AdjList, int source, int destination, vector<bool> &visited) {
     if (source == destination) return true;
     visited[source] = true;
@@ -185,6 +198,7 @@ enum GraphProblemsOptions {
     CHECK_PATH_EXISTENCE = 5 ///< Option to check the existence of a path between two nodes
 };
 
+// Function to display the graph problems menu
 void displayGraphsMenu() {
     cout << endl << "GRAPHS. APPLICATIONS " << endl;
     cout << "4.1. Graph representation: adjacency matrix <=> node lists" << endl;
@@ -195,15 +209,16 @@ void displayGraphsMenu() {
     cout << "4.0. Exit Graphs." << endl;
 }
 
+// Function to handle graph problems
 void handleGraphs() {
     int choice = 0;
     do {
         displayGraphsMenu();
-
         choice = handleUserInput<int>("Graph Problem Option: ",
                                       [](int x) { return x >= 0 && x <= 5; },
                                       "Invalid input! Please enter a number between 0 and 5: ");
         cout << endl;
+
         switch (choice) {
             case CONVERT_ADJ_MATRIX_TO_ADJ_LIST: {
                 int localChoice = handleUserInput<int>(
