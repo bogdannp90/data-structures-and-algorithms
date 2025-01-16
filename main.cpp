@@ -41,11 +41,11 @@ int main() {
             case DYNAMIC_LISTS:
                 handleDynamicLists();
                 break;
+            case GRAPH_PROBLEMS:
+                handleGraphs();
+            break;
             case EXIT:
                 cout << "Goodbye!" << endl;
-                break;
-            case GRAPH_PROBLEMS:
-                //handleGraphs();
                 break;
             default:
                 cout << "Invalid option! Please enter a number from 0 to 3!" << endl;
@@ -62,7 +62,7 @@ void displayMainMenu() {
     cout << "1. Various problems" << endl;
     cout << "2. Sorting algorithms" << endl;
     cout << "3. Dynamic lists" << endl;
-    cout << "4. Graph problems" << endl;
+    cout << "4. Graphs problems" << endl;
     cout << "0. Exit program" << endl;
     cout << "Option: ";
 }
