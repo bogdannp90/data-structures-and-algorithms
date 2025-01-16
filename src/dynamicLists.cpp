@@ -31,10 +31,10 @@ void traverseSimpleList(number *head) {
 
 // Function to add a value to a simple list
 number* addToSimpleList(number *head, int value) {
-    number *newNode = new number;
-    newNode->value = value;
-    newNode->next = head;
-    return newNode;
+    number *newHead = new number;
+    newHead->value = value;
+    newHead->next = head;
+    return newHead;
 }
 
 // Function to delete a value from a simple list
@@ -75,20 +75,20 @@ number* createOrderedList() {
 
 // Function to add a value to an ordered list
 number* addToOrderedList(number *head, int value) {
-    number *newNode = new number;
-    newNode->value = value;
-    newNode->next = nullptr;
+    number *newHead = new number;
+    newHead->value = value;
+    newHead->next = nullptr;
 
     if (head == nullptr || head->value >= value) {
-        newNode->next = head;
-        head = newNode;
+        newHead->next = head;
+        head = newHead;
     } else {
         number *current = head;
         while (current->next != nullptr && current->next->value < value) {
             current = current->next;
         }
-        newNode->next = current->next;
-        current->next = newNode;
+        newHead->next = current->next;
+        current->next = newHead;
     }
     return head;
 }
@@ -166,17 +166,17 @@ void traverseDoubleListBackward(const list2 *list) {
 
 // Function to add a value to a doubly linked list
 list2* addToDoubleList(list2 *list, int value) {
-    number2 *newNode = new number2;
-    newNode->value = value;
-    newNode->next = nullptr;
-    newNode->prev = list->last;
+    number2 *newHead = new number2;
+    newHead->value = value;
+    newHead->next = nullptr;
+    newHead->prev = list->last;
 
     if (list->first == nullptr) {
-        list->first = newNode;
-        list->last = newNode;
+        list->first = newHead;
+        list->last = newHead;
     } else {
-        list->last->next = newNode;
-        list->last = newNode;
+        list->last->next = newHead;
+        list->last = newHead;
     }
     return list;
 }
@@ -296,11 +296,11 @@ monomial* createPolynomial() {
         coefficient = handleUserInputFloat(coefficient);
         degree = handleUserInputInteger(degree);
 
-        monomial *newNode = new monomial;
-        newNode->degree = degree;
-        newNode->coefficient = coefficient;
-        newNode->next = head;
-        head = newNode;
+        monomial *newHead = new monomial;
+        newHead->degree = degree;
+        newHead->coefficient = coefficient;
+        newHead->next = head;
+        head = newHead;
         cout << "The polynomial is: ";
     }
     printPolynomial(head);
@@ -314,40 +314,40 @@ void addPolynomials(monomial *poly1, monomial *poly2) {
     monomial *current2 = poly2;
 
     while (current1 != nullptr && current2 != nullptr) {
-        monomial *newNode = new monomial;
+        monomial *newHead = new monomial;
         if (current1->degree == current2->degree) {
-            newNode->degree = current1->degree;
-            newNode->coefficient = current1->coefficient + current2->coefficient;
+            newHead->degree = current1->degree;
+            newHead->coefficient = current1->coefficient + current2->coefficient;
             current1 = current1->next;
             current2 = current2->next;
         } else if (current1->degree > current2->degree) {
-            newNode->degree = current1->degree;
-            newNode->coefficient = current1->coefficient;
+            newHead->degree = current1->degree;
+            newHead->coefficient = current1->coefficient;
             current1 = current1->next;
         } else {
-            newNode->degree = current2->degree;
-            newNode->coefficient = current2->coefficient;
+            newHead->degree = current2->degree;
+            newHead->coefficient = current2->coefficient;
             current2 = current2->next;
         }
-        newNode->next = result;
-        result = newNode;
+        newHead->next = result;
+        result = newHead;
     }
 
     while (current1 != nullptr) {
-        monomial *newNode = new monomial;
-        newNode->degree = current1->degree;
-        newNode->coefficient = current1->coefficient;
-        newNode->next = result;
-        result = newNode;
+        monomial *newHead = new monomial;
+        newHead->degree = current1->degree;
+        newHead->coefficient = current1->coefficient;
+        newHead->next = result;
+        result = newHead;
         current1 = current1->next;
     }
 
     while (current2 != nullptr) {
-        monomial *newNode = new monomial;
-        newNode->degree = current2->degree;
-        newNode->coefficient = current2->coefficient;
-        newNode->next = result;
-        result = newNode;
+        monomial *newHead = new monomial;
+        newHead->degree = current2->degree;
+        newHead->coefficient = current2->coefficient;
+        newHead->next = result;
+        result = newHead;
         current2 = current2->next;
     }
 
@@ -363,11 +363,11 @@ void multiplyPolynomials(monomial *poly1, monomial *poly2) {
     monomial *result = nullptr;
     for (monomial *current1 = poly1; current1 != nullptr; current1 = current1->next) {
         for (monomial *current2 = poly2; current2 != nullptr; current2 = current2->next) {
-            monomial *newNode = new monomial;
-            newNode->degree = current1->degree + current2->degree;
-            newNode->coefficient = current1->coefficient * current2->coefficient;
-            newNode->next = result;
-            result = newNode;
+            monomial *newHead = new monomial;
+            newHead->degree = current1->degree + current2->degree;
+            newHead->coefficient = current1->coefficient * current2->coefficient;
+            newHead->next = result;
+            result = newHead;
         }
     }
 
@@ -423,10 +423,10 @@ bool checkParentheses(const string &expression) {
     character *stack = nullptr;
     for (char c : expression) {
         if (c == '(' || c == '{' || c == '[') {
-            character *newNode = new character;
-            newNode->ch = c;
-            newNode->next = stack;
-            stack = newNode;
+            character *newHead = new character;
+            newHead->ch = c;
+            newHead->next = stack;
+            stack = newHead;
         } else if (c == ')' || c == '}' || c == ']') {
             if (stack == nullptr) return false;
             char top = stack->ch;
@@ -454,15 +454,15 @@ enum DynamicListsOptions {
 //Function to display the dynamic lists menu
 void displayDynamicListsMenu() {
     cout << endl << "Dynamic Lists" << endl;
-    cout << "1. Singly Linked Lists" << endl;
-    cout << "2. Ordered Singly Linked List from Input" << endl;
-    cout << "3. Doubly Linked Lists" << endl;
-    cout << "4. Stacks" << endl;
-    cout << "5. Queues" << endl;
-    cout << "6. Addition and Multiplication of Two Polynomials" << endl;
-    cout << "7. Merging Two Ordered Lists" << endl;
-    cout << "8. Parentheses Verification in an Arithmetic Expression" << endl;
-    cout << "0. Exit Dynamic Lists!" << endl;
+    cout << "3.1. Singly Linked Lists" << endl;
+    cout << "3.2. Ordered Singly Linked List from Input" << endl;
+    cout << "3.3. Doubly Linked Lists" << endl;
+    cout << "3.4. Stacks" << endl;
+    cout << "3.5. Queues" << endl;
+    cout << "3.6. Addition and Multiplication of Two Polynomials" << endl;
+    cout << "3.7. Merging Two Ordered Lists" << endl;
+    cout << "3.8. Parentheses Verification in an Arithmetic Expression" << endl;
+    cout << "3.0. Exit Dynamic Lists!" << endl;
     cout << "Dynamic Lists Option: ";
 }
 
