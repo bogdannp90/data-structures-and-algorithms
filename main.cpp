@@ -5,6 +5,7 @@
 #include "include/sortingAlgorithms.h"
 #include "include/dynamicLists.h"
 #include "include/graphs.h"
+#include "trees.h"
 
 using namespace std;
 
@@ -14,7 +15,8 @@ enum MainMenuOptions {
     VARIOUS_PROBLEMS,    ///< Option for various problems
     SORTING_ALGORITHMS,  ///< Option for sorting algorithms
     DYNAMIC_LISTS,      ///< Option for dynamic lists
-    GRAPH_PROBLEMS       ///< Option for graph problems
+    GRAPH_PROBLEMS,       ///< Option for graph problems
+    TREES_PROBLEMS
 };
 
 // Function prototypes
@@ -44,6 +46,9 @@ int main() {
             case GRAPH_PROBLEMS:
                 handleGraphs();
             break;
+            case TREES_PROBLEMS:
+                handleTrees();
+            break;
             case EXIT:
                 cout << "Goodbye!" << endl;
                 break;
@@ -63,6 +68,7 @@ void displayMainMenu() {
     cout << "2. Sorting algorithms" << endl;
     cout << "3. Dynamic lists" << endl;
     cout << "4. Graphs problems" << endl;
+    cout << "5. Trees problems" << endl;
     cout << "0. Exit program" << endl;
     cout << "Option: ";
 }
