@@ -1,9 +1,5 @@
-//
-// Created by Bogdan Pîrvu on 17.01.2025.
-//
-
-#ifndef TREES_H
-#define TREES_H
+#ifndef TREE_H
+#define TREE_H
 
 struct treeNode {
     int value;
@@ -26,6 +22,4 @@ void displayTreesMenu();
 
 void handleTrees();
 
-
-
-#endif //TREES_H
+#endif //TREE_H

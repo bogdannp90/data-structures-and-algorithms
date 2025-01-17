@@ -1,6 +1,3 @@
-//
-// Created by Bogdan Pîrvu on 17.01.2025.
-//
 
 #include "trees.h"
 #include <iostream>
@@ -101,8 +98,8 @@ void handleTrees() {
                 do {
 
                     localChoice = handleUserInput<int>(
-                        "1. Inorder traversal(SRD)\n2. Postorder traversal(SDR)\n3. Preorder traversal(RSD)\nEnter your choice: ",
-                        [](const int x) { return x >= 1 && x <= 3; },
+                        "1. Inorder traversal(SRD)\n2. Postorder traversal(SDR)\n3. Preorder traversal(RSD)\n0. Exit \nEnter your choice: ",
+                        [](const int x) { return x >= 0 && x <= 3; },
                         "Invalid input! Please enter a number between 1 and 3: ");
 
                     switch (localChoice) {

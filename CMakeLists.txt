@@ -16,5 +16,5 @@ add_executable(laborator main.cpp
         include/graphs.h
         src/inputValidation.cpp
         include/inputValidation.h
-        trees.cpp
-        trees.h)
+        src/trees.cpp
+        include/trees.h)

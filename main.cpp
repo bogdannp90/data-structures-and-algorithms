@@ -5,7 +5,7 @@
 #include "include/sortingAlgorithms.h"
 #include "include/dynamicLists.h"
 #include "include/graphs.h"
-#include "trees.h"
+#include "include/trees.h"
 
 using namespace std;
 
