@@ -71,11 +71,11 @@ enum VariousProblemsOptions {
 //Function to display the various problems menu
 void displayVariousProblemsMenu() {
     cout << endl << "VARIOUS PROBLEMS" << endl;
-    cout << "1.1. Solving quadratic equation" << endl;
-    cout << "1.2. Matrix multiplication" << endl;
-    cout << "1.3. Prime number check" << endl;
-    cout << "1.4. Base conversion of a natural number" << endl;
-    cout << "1.0. Exit various problems!" << endl;
+    cout << "1. Solving quadratic equation" << endl;
+    cout << "2. Matrix multiplication" << endl;
+    cout << "3. Prime number check" << endl;
+    cout << "4. Base conversion of a natural number" << endl;
+    cout << "0. Exit various problems!" << endl;
     cout << "Option for various problems: ";
 }
 

@@ -201,12 +201,12 @@ enum GraphProblemsOptions {
 // Function to display the graph problems menu
 void displayGraphsMenu() {
     cout << endl << "GRAPHS. APPLICATIONS " << endl;
-    cout << "4.1. Graph representation: adjacency matrix <=> node lists" << endl;
-    cout << "4.2. Graph representation: adjacency matrix <=> edge lists" << endl;
-    cout << "4.3. Graph representation: node lists <=> edge lists" << endl;
-    cout << "4.4. Graph traversal: depth-first, breadth-first." << endl;
-    cout << "4.5. Check existence of a path between any two nodes" << endl;
-    cout << "4.0. Exit Graphs." << endl;
+    cout << "1. Graph representation: adjacency matrix <=> node lists" << endl;
+    cout << "2. Graph representation: adjacency matrix <=> edge lists" << endl;
+    cout << "3. Graph representation: node lists <=> edge lists" << endl;
+    cout << "4. Graph traversal: depth-first, breadth-first." << endl;
+    cout << "5. Check existence of a path between any two nodes" << endl;
+    cout << "0. Exit Graphs." << endl;
 }
 
 // Function to handle graph problems

@@ -64,9 +64,9 @@ enum TreesMenuOptions {
 void displayTreesMenu() {
     cout << endl;
     cout << "TREES " << endl;
-    cout << "4.1. Create binary trees" << endl;
-    cout << "4.2. Traverse Inorder (SRD), Postorder (SDR), Preorder (RSD) for binary trees." << endl;
-    cout << "4.0. Exit Trees." << endl;
+    cout << "1. Create binary trees" << endl;
+    cout << "2. Traverse Inorder (SRD), Postorder (SDR), Preorder (RSD) for binary trees." << endl;
+    cout << "0. Exit Trees." << endl;
 }
 
 void handleTrees() {

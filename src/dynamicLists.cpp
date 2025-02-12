@@ -454,15 +454,15 @@ enum DynamicListsOptions {
 //Function to display the dynamic lists menu
 void displayDynamicListsMenu() {
     cout << endl << "Dynamic Lists" << endl;
-    cout << "3.1. Singly Linked Lists" << endl;
-    cout << "3.2. Ordered Singly Linked List from Input" << endl;
-    cout << "3.3. Doubly Linked Lists" << endl;
-    cout << "3.4. Stacks" << endl;
-    cout << "3.5. Queues" << endl;
-    cout << "3.6. Addition and Multiplication of Two Polynomials" << endl;
-    cout << "3.7. Merging Two Ordered Lists" << endl;
-    cout << "3.8. Parentheses Verification in an Arithmetic Expression" << endl;
-    cout << "3.0. Exit Dynamic Lists!" << endl;
+    cout << "1. Singly Linked Lists" << endl;
+    cout << "2. Ordered Singly Linked List from Input" << endl;
+    cout << "3. Doubly Linked Lists" << endl;
+    cout << "4. Stacks" << endl;
+    cout << "5. Queues" << endl;
+    cout << "6. Addition and Multiplication of Two Polynomials" << endl;
+    cout << "7. Merging Two Ordered Lists" << endl;
+    cout << "8. Parentheses Verification in an Arithmetic Expression" << endl;
+    cout << "0. Exit Dynamic Lists!" << endl;
     cout << "Dynamic Lists Option: ";
 }
 

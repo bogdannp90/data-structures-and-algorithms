@@ -242,17 +242,17 @@ void printArray(const vector<float>& arr) {
 //Function to display the sorting algorithms menu
 void displaySortingAlgorithmsMenu() {
     cout << "Sorting Algorithms" << endl;
-    cout << "2.1. Bubble Sort" << endl;
-    cout << "2.2. Counting Sort" << endl;
-    cout << "2.3. Selection Sort" << endl;
-    cout << "2.4. Quicksort" << endl;
-    cout << "2.5. Merge Sort" << endl;
-    cout << "2.6. Insertion Sort" << endl;
-    cout << "2.7. Shell Sort" << endl;
-    cout << "2.8. Radix Sort" << endl;
-    cout << "2.9. Sequential Search in an array" << endl;
-    cout << "2.10. Binary Search in an array" << endl;
-    cout << "2.0. Exit sorting algorithms!" << endl;
+    cout << "1. Bubble Sort" << endl;
+    cout << "2. Counting Sort" << endl;
+    cout << "3. Selection Sort" << endl;
+    cout << "4. Quicksort" << endl;
+    cout << "5. Merge Sort" << endl;
+    cout << "6. Insertion Sort" << endl;
+    cout << "7. Shell Sort" << endl;
+    cout << "8. Radix Sort" << endl;
+    cout << "9. Sequential Search in an array" << endl;
+    cout << "10. Binary Search in an array" << endl;
+    cout << "0. Exit sorting algorithms!" << endl;
 }
 
 // Function to handle sorting algorithms menu
